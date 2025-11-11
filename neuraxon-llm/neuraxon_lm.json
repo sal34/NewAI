@@ -1,0 +1,4359 @@
+{
+  "parameters": {
+    "num_input_neurons": 91,
+    "num_hidden_neurons": 256,
+    "num_output_neurons": 91,
+    "connection_probability": 0.08,
+    "membrane_time_constant": 20.0,
+    "firing_threshold_excitatory": 1.0,
+    "firing_threshold_inhibitory": -1.0,
+    "adaptation_rate": 0.05,
+    "spontaneous_firing_rate": 0.01,
+    "neuron_health_decay": 0.001,
+    "tau_fast": 5.0,
+    "w_fast_init_min": -1.0,
+    "w_fast_init_max": 1.0,
+    "tau_slow": 50.0,
+    "w_slow_init_min": -0.5,
+    "w_slow_init_max": 0.5,
+    "tau_meta": 1000.0,
+    "w_meta_init_min": -0.3,
+    "w_meta_init_max": 0.3,
+    "learning_rate": 0.015,
+    "stdp_window": 20.0,
+    "synapse_integrity_threshold": 0.1,
+    "synapse_formation_prob": 0.05,
+    "synapse_death_prob": 0.01,
+    "neuron_death_threshold": 0.1,
+    "dopamine_baseline": 0.1,
+    "serotonin_baseline": 0.1,
+    "acetylcholine_baseline": 0.1,
+    "norepinephrine_baseline": 0.1,
+    "neuromod_decay_rate": 0.1,
+    "dt": 1.0,
+    "simulation_steps": 100
+  },
+  "neurons": {
+    "input": [
+      {
+        "id": 0,
+        "type": "input",
+        "membrane_potential": -4.631478203374278e-07,
+        "trinary_state": 0,
+        "adaptation": 9.17032684268107e-06,
+        "health": -40.101999999997204,
+        "is_active": true
+      },
+      {
+        "id": 1,
+        "type": "input",
+        "membrane_potential": -0.0006233528220820068,
+        "trinary_state": 0,
+        "adaptation": 0.012342385877223734,
+        "health": -31.73100000001987,
+        "is_active": true
+      },
+      {
+        "id": 2,
+        "type": "input",
+        "membrane_potential": -7.286835437046017e-38,
+        "trinary_state": 0,
+        "adaptation": 1.4427934165351112e-36,
+        "health": -40.449999999996486,
+        "is_active": true
+      },
+      {
+        "id": 3,
+        "type": "input",
+        "membrane_potential": -9.086646482747245e-56,
+        "trinary_state": 0,
+        "adaptation": 1.7991560035839544e-54,
+        "health": -40.46349999999648,
+        "is_active": true
+      },
+      {
+        "id": 4,
+        "type": "input",
+        "membrane_potential": -9.533429835517525e-121,
+        "trinary_state": 0,
+        "adaptation": 1.8876191074324697e-119,
+        "health": -40.51599999999627,
+        "is_active": true
+      },
+      {
+        "id": 5,
+        "type": "input",
+        "membrane_potential": -3.102868772238507e-67,
+        "trinary_state": 0,
+        "adaptation": 6.143680169032243e-66,
+        "health": -40.478499999996366,
+        "is_active": true
+      },
+      {
+        "id": 6,
+        "type": "input",
+        "membrane_potential": -2.824025184220264e-35,
+        "trinary_state": 0,
+        "adaptation": 5.591569864756122e-34,
+        "health": -40.40799999999656,
+        "is_active": true
+      },
+      {
+        "id": 7,
+        "type": "input",
+        "membrane_potential": -3.1374991049028167e-30,
+        "trinary_state": 0,
+        "adaptation": 6.212248227707577e-29,
+        "health": -40.476999999996345,
+        "is_active": true
+      },
+      {
+        "id": 8,
+        "type": "input",
+        "membrane_potential": -4.0337013981296336e-30,
+        "trinary_state": 0,
+        "adaptation": 7.986728768296674e-29,
+        "health": -40.4499999999964,
+        "is_active": true
+      },
+      {
+        "id": 9,
+        "type": "input",
+        "membrane_potential": -9.002253603391092e-11,
+        "trinary_state": 0,
+        "adaptation": 1.7824462134714362e-09,
+        "health": -40.461999999996365,
+        "is_active": true
+      },
+      {
+        "id": 10,
+        "type": "input",
+        "membrane_potential": -1.388777630554866e-120,
+        "trinary_state": 0,
+        "adaptation": 2.7497797084986344e-119,
+        "health": -40.499499999996324,
+        "is_active": true
+      },
+      {
+        "id": 11,
+        "type": "input",
+        "membrane_potential": -0.00010349983461392563,
+        "trinary_state": 0,
+        "adaptation": 0.0020492967253557272,
+        "health": -39.810999999998,
+        "is_active": true
+      },
+      {
+        "id": 12,
+        "type": "input",
+        "membrane_potential": -2.4070838569366223e-07,
+        "trinary_state": 0,
+        "adaptation": 4.766026036734513e-06,
+        "health": -40.41549999999646,
+        "is_active": true
+      },
+      {
+        "id": 13,
+        "type": "input",
+        "membrane_potential": 0.9499945417706678,
+        "trinary_state": 0,
+        "adaptation": 0.0011080729407772613,
+        "health": -40.01499999999739,
+        "is_active": true
+      },
+      {
+        "id": 14,
+        "type": "input",
+        "membrane_potential": -2.3294932632216515e-157,
+        "trinary_state": 0,
+        "adaptation": 4.61239666117887e-156,
+        "health": -40.47849999999639,
+        "is_active": true
+      },
+      {
+        "id": 15,
+        "type": "input",
+        "membrane_potential": -1.1219932935044783e-108,
+        "trinary_state": 0,
+        "adaptation": 2.221546721138867e-107,
+        "health": -40.472499999996344,
+        "is_active": true
+      },
+      {
+        "id": 16,
+        "type": "input",
+        "membrane_potential": -1.9583909910963586e-50,
+        "trinary_state": 0,
+        "adaptation": 3.8776141623707894e-49,
+        "health": -40.49199999999634,
+        "is_active": true
+      },
+      {
+        "id": 17,
+        "type": "input",
+        "membrane_potential": -3.295718864644351e-48,
+        "trinary_state": 0,
+        "adaptation": 6.525523351995815e-47,
+        "health": -40.4934999999963,
+        "is_active": true
+      },
+      {
+        "id": 18,
+        "type": "input",
+        "membrane_potential": -4.890186632103736e-41,
+        "trinary_state": 0,
+        "adaptation": 9.682569531565396e-40,
+        "health": -40.485999999996324,
+        "is_active": true
+      },
+      {
+        "id": 19,
+        "type": "input",
+        "membrane_potential": -9.206267736698068e-88,
+        "trinary_state": 0,
+        "adaptation": 1.8228410118662174e-86,
+        "health": -40.49199999999629,
+        "is_active": true
+      },
+      {
+        "id": 20,
+        "type": "input",
+        "membrane_potential": -1.2419629415524026e-85,
+        "trinary_state": 0,
+        "adaptation": 2.459086624273757e-84,
+        "health": -40.48199999999634,
+        "is_active": true
+      },
+      {
+        "id": 21,
+        "type": "input",
+        "membrane_potential": -2.5138391446855514e-115,
+        "trinary_state": 0,
+        "adaptation": 4.9774015064773914e-114,
+        "health": -40.48449999999634,
+        "is_active": true
+      },
+      {
+        "id": 22,
+        "type": "input",
+        "membrane_potential": -3.025117396014487e-119,
+        "trinary_state": 0,
+        "adaptation": 5.989732444108684e-118,
+        "health": -40.494999999996296,
+        "is_active": true
+      },
+      {
+        "id": 23,
+        "type": "input",
+        "membrane_potential": -7.220785685776528e-126,
+        "trinary_state": 0,
+        "adaptation": 1.4297155657837522e-124,
+        "health": -40.49649999999633,
+        "is_active": true
+      },
+      {
+        "id": 24,
+        "type": "input",
+        "membrane_potential": -5.959808025634613e-119,
+        "trinary_state": 0,
+        "adaptation": 1.1800419890756532e-117,
+        "health": -40.50399999999629,
+        "is_active": true
+      },
+      {
+        "id": 25,
+        "type": "input",
+        "membrane_potential": -8.905938905130676e-08,
+        "trinary_state": 0,
+        "adaptation": 1.7633759032158736e-06,
+        "health": -40.398999999996484,
+        "is_active": true
+      },
+      {
+        "id": 26,
+        "type": "input",
+        "membrane_potential": -6.713240652245336e-46,
+        "trinary_state": 0,
+        "adaptation": 1.3292216491445766e-44,
+        "health": -40.49649999999634,
+        "is_active": true
+      },
+      {
+        "id": 27,
+        "type": "input",
+        "membrane_potential": -8.524100279615102e-39,
+        "trinary_state": 0,
+        "adaptation": 1.68777185536379e-37,
+        "health": -40.48749999999635,
+        "is_active": true
+      },
+      {
+        "id": 28,
+        "type": "input",
+        "membrane_potential": -4.6812971602948634e-06,
+        "trinary_state": 0,
+        "adaptation": 9.268968377383828e-05,
+        "health": -40.40199999999654,
+        "is_active": true
+      },
+      {
+        "id": 29,
+        "type": "input",
+        "membrane_potential": -3.725999413195295e-12,
+        "trinary_state": 0,
+        "adaptation": 7.377478838126682e-11,
+        "health": -40.41849999999653,
+        "is_active": true
+      },
+      {
+        "id": 30,
+        "type": "input",
+        "membrane_potential": -1.138812391896849e-06,
+        "trinary_state": 0,
+        "adaptation": 2.2548485359557607e-05,
+        "health": -40.37199999999658,
+        "is_active": true
+      },
+      {
+        "id": 31,
+        "type": "input",
+        "membrane_potential": -9.701042808788415e-14,
+        "trinary_state": 0,
+        "adaptation": 1.920806476140106e-12,
+        "health": -40.47899999999632,
+        "is_active": true
+      },
+      {
+        "id": 32,
+        "type": "input",
+        "membrane_potential": -1.3566407710581986e-07,
+        "trinary_state": 0,
+        "adaptation": 2.686148726695233e-06,
+        "health": -40.43799999999648,
+        "is_active": true
+      },
+      {
+        "id": 33,
+        "type": "input",
+        "membrane_potential": -4.512456519028734e-11,
+        "trinary_state": 0,
+        "adaptation": 8.934663907676893e-10,
+        "health": -40.445499999996414,
+        "is_active": true
+      },
+      {
+        "id": 34,
+        "type": "input",
+        "membrane_potential": -2.777217977342339e-16,
+        "trinary_state": 0,
+        "adaptation": 5.49889159513783e-15,
+        "health": -40.46799999999638,
+        "is_active": true
+      },
+      {
+        "id": 35,
+        "type": "input",
+        "membrane_potential": -1.5001604207328608e-13,
+        "trinary_state": 0,
+        "adaptation": 2.9703176330510645e-12,
+        "health": -40.45149999999643,
+        "is_active": true
+      },
+      {
+        "id": 36,
+        "type": "input",
+        "membrane_potential": -2.0066111961785148e-16,
+        "trinary_state": 0,
+        "adaptation": 3.973090168433459e-15,
+        "health": -40.33449999999672,
+        "is_active": true
+      },
+      {
+        "id": 37,
+        "type": "input",
+        "membrane_potential": -1.1393451487692695e-13,
+        "trinary_state": 0,
+        "adaptation": 2.2559033945631535e-12,
+        "health": -40.454499999996436,
+        "is_active": true
+      },
+      {
+        "id": 38,
+        "type": "input",
+        "membrane_potential": -2.5500127042452277e-119,
+        "trinary_state": 0,
+        "adaptation": 5.049025154405551e-118,
+        "health": -40.49799999999627,
+        "is_active": true
+      },
+      {
+        "id": 39,
+        "type": "input",
+        "membrane_potential": -8.006220660109709e-13,
+        "trinary_state": 0,
+        "adaptation": 1.5852316907017224e-11,
+        "health": -40.48749999999632,
+        "is_active": true
+      },
+      {
+        "id": 40,
+        "type": "input",
+        "membrane_potential": -2.692961388331199e-09,
+        "trinary_state": 0,
+        "adaptation": 5.332063548895774e-08,
+        "health": -40.43499999999646,
+        "is_active": true
+      },
+      {
+        "id": 41,
+        "type": "input",
+        "membrane_potential": -1.2321246298113524e-11,
+        "trinary_state": 0,
+        "adaptation": 2.4396067670264775e-10,
+        "health": -40.458999999996436,
+        "is_active": true
+      },
+      {
+        "id": 42,
+        "type": "input",
+        "membrane_potential": -2.113369469400885e-08,
+        "trinary_state": 0,
+        "adaptation": 4.184471549413752e-07,
+        "health": -40.451499999996415,
+        "is_active": true
+      },
+      {
+        "id": 43,
+        "type": "input",
+        "membrane_potential": -1.0845070212028269e-07,
+        "trinary_state": 0,
+        "adaptation": 2.147323901981597e-06,
+        "health": -40.44549999999646,
+        "is_active": true
+      },
+      {
+        "id": 44,
+        "type": "input",
+        "membrane_potential": -1.3748898542493172e-120,
+        "trinary_state": 0,
+        "adaptation": 2.722281911413648e-119,
+        "health": -40.4919999999963,
+        "is_active": true
+      },
+      {
+        "id": 45,
+        "type": "input",
+        "membrane_potential": -9.075534490312465e-08,
+        "trinary_state": 0,
+        "adaptation": 1.796955829081868e-06,
+        "health": -40.463499999996394,
+        "is_active": true
+      },
+      {
+        "id": 46,
+        "type": "input",
+        "membrane_potential": -1.576613887870631e-14,
+        "trinary_state": 0,
+        "adaptation": 3.121695497983849e-13,
+        "health": -40.36299999999661,
+        "is_active": true
+      },
+      {
+        "id": 47,
+        "type": "input",
+        "membrane_potential": -1.1435699590487065e-07,
+        "trinary_state": 0,
+        "adaptation": 2.264268518916439e-06,
+        "health": -40.40049999999657,
+        "is_active": true
+      },
+      {
+        "id": 48,
+        "type": "input",
+        "membrane_potential": -1.1131328721125913e-10,
+        "trinary_state": 0,
+        "adaptation": 2.2040030867829306e-09,
+        "health": -40.48149999999633,
+        "is_active": true
+      },
+      {
+        "id": 49,
+        "type": "input",
+        "membrane_potential": -1.2641417562357718e-13,
+        "trinary_state": 0,
+        "adaptation": 2.5030006773468282e-12,
+        "health": -40.46949999999637,
+        "is_active": true
+      },
+      {
+        "id": 50,
+        "type": "input",
+        "membrane_potential": -1.3256430065343055e-21,
+        "trinary_state": 0,
+        "adaptation": 2.6247731529379246e-20,
+        "health": -40.419999999996506,
+        "is_active": true
+      },
+      {
+        "id": 51,
+        "type": "input",
+        "membrane_potential": -7.77665266595258e-14,
+        "trinary_state": 0,
+        "adaptation": 1.5397772278586105e-12,
+        "health": -40.50549999999626,
+        "is_active": true
+      },
+      {
+        "id": 52,
+        "type": "input",
+        "membrane_potential": -5.361760378603103e-128,
+        "trinary_state": 0,
+        "adaptation": 1.0616285549634142e-126,
+        "health": -40.49499999999631,
+        "is_active": true
+      },
+      {
+        "id": 53,
+        "type": "input",
+        "membrane_potential": -0.0004720197897023485,
+        "trinary_state": 0,
+        "adaptation": 0.0093459918361065,
+        "health": -36.7075000000056,
+        "is_active": true
+      },
+      {
+        "id": 54,
+        "type": "input",
+        "membrane_potential": -6.60347309204714e-05,
+        "trinary_state": 0,
+        "adaptation": 0.0013074876722253335,
+        "health": -39.93999999999757,
+        "is_active": true
+      },
+      {
+        "id": 55,
+        "type": "input",
+        "membrane_potential": 0.012942984868681168,
+        "trinary_state": 0,
+        "adaptation": 0.0027810673083980605,
+        "health": -38.5090000000007,
+        "is_active": true
+      },
+      {
+        "id": 56,
+        "type": "input",
+        "membrane_potential": -0.0001727981585226547,
+        "trinary_state": 0,
+        "adaptation": 0.0034214035387485626,
+        "health": -38.657500000000496,
+        "is_active": true
+      },
+      {
+        "id": 57,
+        "type": "input",
+        "membrane_potential": -0.0005082197200291502,
+        "trinary_state": 0,
+        "adaptation": 0.010062750456577174,
+        "health": -34.33150000001232,
+        "is_active": true
+      },
+      {
+        "id": 58,
+        "type": "input",
+        "membrane_potential": -7.281103402104331e-05,
+        "trinary_state": 0,
+        "adaptation": 0.0014416584736166576,
+        "health": -39.6009999999983,
+        "is_active": true
+      },
+      {
+        "id": 59,
+        "type": "input",
+        "membrane_potential": -0.00011490026495413602,
+        "trinary_state": 0,
+        "adaptation": 0.0022750252460918934,
+        "health": -39.191499999999294,
+        "is_active": true
+      },
+      {
+        "id": 60,
+        "type": "input",
+        "membrane_potential": -6.120428623230604e-05,
+        "trinary_state": 0,
+        "adaptation": 0.0012118448673996594,
+        "health": -38.713000000000804,
+        "is_active": true
+      },
+      {
+        "id": 61,
+        "type": "input",
+        "membrane_potential": -0.00031011868456039607,
+        "trinary_state": 0,
+        "adaptation": 0.006140349954295841,
+        "health": -36.35800000000626,
+        "is_active": true
+      },
+      {
+        "id": 62,
+        "type": "input",
+        "membrane_potential": -8.99429171394597e-09,
+        "trinary_state": 0,
+        "adaptation": 1.780869759361302e-07,
+        "health": -40.46199999999641,
+        "is_active": true
+      },
+      {
+        "id": 63,
+        "type": "input",
+        "membrane_potential": -6.138329109032607e-05,
+        "trinary_state": 0,
+        "adaptation": 0.0012153891635884562,
+        "health": -40.167999999997136,
+        "is_active": true
+      },
+      {
+        "id": 64,
+        "type": "input",
+        "membrane_potential": -0.00018640240004701993,
+        "trinary_state": 0,
+        "adaptation": 0.0036907675209309947,
+        "health": -38.40250000000107,
+        "is_active": true
+      },
+      {
+        "id": 65,
+        "type": "input",
+        "membrane_potential": -0.00021844722569235996,
+        "trinary_state": 0,
+        "adaptation": 0.004325255068708727,
+        "health": -39.210999999999366,
+        "is_active": true
+      },
+      {
+        "id": 66,
+        "type": "input",
+        "membrane_potential": -0.00038288201764557513,
+        "trinary_state": 0,
+        "adaptation": 0.007581063949382388,
+        "health": -36.56500000000579,
+        "is_active": true
+      },
+      {
+        "id": 67,
+        "type": "input",
+        "membrane_potential": -0.00021344544396835805,
+        "trinary_state": 0,
+        "adaptation": 0.004226219790573489,
+        "health": -36.84250000000509,
+        "is_active": true
+      },
+      {
+        "id": 68,
+        "type": "input",
+        "membrane_potential": -0.0001612409218858848,
+        "trinary_state": 0,
+        "adaptation": 0.0031925702533405187,
+        "health": -39.30849999999874,
+        "is_active": true
+      },
+      {
+        "id": 69,
+        "type": "input",
+        "membrane_potential": -9.82601485936191e-07,
+        "trinary_state": 0,
+        "adaptation": 1.945550942153658e-05,
+        "health": -40.405499999996515,
+        "is_active": true
+      },
+      {
+        "id": 70,
+        "type": "input",
+        "membrane_potential": -0.0002824369994226725,
+        "trinary_state": 0,
+        "adaptation": 0.005592252588568916,
+        "health": -37.201000000004065,
+        "is_active": true
+      },
+      {
+        "id": 71,
+        "type": "input",
+        "membrane_potential": -0.0003009000817905274,
+        "trinary_state": 0,
+        "adaptation": 0.005957821619452442,
+        "health": -36.95800000000468,
+        "is_active": true
+      },
+      {
+        "id": 72,
+        "type": "input",
+        "membrane_potential": -0.0002759652596066016,
+        "trinary_state": 0,
+        "adaptation": 0.005464112140210712,
+        "health": -36.424000000006394,
+        "is_active": true
+      },
+      {
+        "id": 73,
+        "type": "input",
+        "membrane_potential": -0.00011881332210000608,
+        "trinary_state": 0,
+        "adaptation": 0.0023525037775801202,
+        "health": -38.88700000000005,
+        "is_active": true
+      },
+      {
+        "id": 74,
+        "type": "input",
+        "membrane_potential": -5.334558966765573e-05,
+        "trinary_state": 0,
+        "adaptation": 0.0010562426754195835,
+        "health": -39.896499999997566,
+        "is_active": true
+      },
+      {
+        "id": 75,
+        "type": "input",
+        "membrane_potential": -1.2152176226378649e-05,
+        "trinary_state": 0,
+        "adaptation": 0.00024061308928229722,
+        "health": -39.75399999999816,
+        "is_active": true
+      },
+      {
+        "id": 76,
+        "type": "input",
+        "membrane_potential": -1.3756800739165676e-07,
+        "trinary_state": 0,
+        "adaptation": 2.723846546354804e-06,
+        "health": -40.341999999996574,
+        "is_active": true
+      },
+      {
+        "id": 77,
+        "type": "input",
+        "membrane_potential": -6.137327513376394e-05,
+        "trinary_state": 0,
+        "adaptation": 0.001215190847648526,
+        "health": -39.64449999999825,
+        "is_active": true
+      },
+      {
+        "id": 78,
+        "type": "input",
+        "membrane_potential": -1.2120949352130626e-05,
+        "trinary_state": 0,
+        "adaptation": 0.00023999479717218638,
+        "health": -40.45599999999639,
+        "is_active": true
+      },
+      {
+        "id": 79,
+        "type": "input",
+        "membrane_potential": -8.643688738887665e-137,
+        "trinary_state": 0,
+        "adaptation": 1.7114503702997577e-135,
+        "health": -40.49349999999628,
+        "is_active": true
+      },
+      {
+        "id": 80,
+        "type": "input",
+        "membrane_potential": -1.0077589588299203e-140,
+        "trinary_state": 0,
+        "adaptation": 1.995362738483242e-139,
+        "health": -40.50899999999626,
+        "is_active": true
+      },
+      {
+        "id": 81,
+        "type": "input",
+        "membrane_potential": -3.9933452296414745e-11,
+        "trinary_state": 0,
+        "adaptation": 7.906823554690119e-10,
+        "health": -40.50099999999628,
+        "is_active": true
+      },
+      {
+        "id": 82,
+        "type": "input",
+        "membrane_potential": -2.932406060954633e-55,
+        "trinary_state": 0,
+        "adaptation": 5.806164000690173e-54,
+        "health": -40.46949999999635,
+        "is_active": true
+      },
+      {
+        "id": 83,
+        "type": "input",
+        "membrane_potential": -3.0012543511929004e-178,
+        "trinary_state": 0,
+        "adaptation": 5.942483615361942e-177,
+        "health": -40.50099999999631,
+        "is_active": true
+      },
+      {
+        "id": 84,
+        "type": "input",
+        "membrane_potential": -1.7339832709179133e-136,
+        "trinary_state": 0,
+        "adaptation": 3.433286876417469e-135,
+        "health": -40.47399999999636,
+        "is_active": true
+      },
+      {
+        "id": 85,
+        "type": "input",
+        "membrane_potential": -4.798061406281523e-137,
+        "trinary_state": 0,
+        "adaptation": 9.500161584437414e-136,
+        "health": -40.48899999999633,
+        "is_active": true
+      },
+      {
+        "id": 86,
+        "type": "input",
+        "membrane_potential": -2.6207948172434535e-137,
+        "trinary_state": 0,
+        "adaptation": 5.189173738142037e-136,
+        "health": -40.47699999999636,
+        "is_active": true
+      },
+      {
+        "id": 87,
+        "type": "input",
+        "membrane_potential": -2.7343689047480557e-52,
+        "trinary_state": 0,
+        "adaptation": 5.41405043140115e-51,
+        "health": -40.50699999999628,
+        "is_active": true
+      },
+      {
+        "id": 88,
+        "type": "input",
+        "membrane_potential": -2.761988792675331e-52,
+        "trinary_state": 0,
+        "adaptation": 5.468737809497155e-51,
+        "health": -40.49949999999631,
+        "is_active": true
+      },
+      {
+        "id": 89,
+        "type": "input",
+        "membrane_potential": -2.707025215700575e-52,
+        "trinary_state": 0,
+        "adaptation": 5.359909927087138e-51,
+        "health": -40.500999999996296,
+        "is_active": true
+      },
+      {
+        "id": 90,
+        "type": "input",
+        "membrane_potential": -5.490832440468028e-65,
+        "trinary_state": 0,
+        "adaptation": 1.0871848232126694e-63,
+        "health": -40.49499999999629,
+        "is_active": true
+      }
+    ],
+    "hidden": [
+      {
+        "id": 91,
+        "type": "hidden",
+        "membrane_potential": 9.69358540187522e-07,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.40100000000000136,
+        "is_active": false
+      },
+      {
+        "id": 92,
+        "type": "hidden",
+        "membrane_potential": -0.01352169253988224,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.6840000000000014,
+        "is_active": false
+      },
+      {
+        "id": 93,
+        "type": "hidden",
+        "membrane_potential": 0.000373261237286429,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -1.6839999999999264,
+        "is_active": false
+      },
+      {
+        "id": 94,
+        "type": "hidden",
+        "membrane_potential": 0.0008028442589917725,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.1695000000000015,
+        "is_active": false
+      },
+      {
+        "id": 95,
+        "type": "hidden",
+        "membrane_potential": -0.0004700595307034689,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.4520000000000016,
+        "is_active": false
+      },
+      {
+        "id": 96,
+        "type": "hidden",
+        "membrane_potential": -3.5098566408492315e-05,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -1.1064999999999907,
+        "is_active": false
+      },
+      {
+        "id": 97,
+        "type": "hidden",
+        "membrane_potential": -4.786713873231709e-06,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.4380000000000015,
+        "is_active": false
+      },
+      {
+        "id": 98,
+        "type": "hidden",
+        "membrane_potential": -1.9590682220294983e-07,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.38550000000000195,
+        "is_active": false
+      },
+      {
+        "id": 99,
+        "type": "hidden",
+        "membrane_potential": -0.006846141637723298,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -1.3039999999999683,
+        "is_active": false
+      },
+      {
+        "id": 100,
+        "type": "hidden",
+        "membrane_potential": 8.950222163307898e-06,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.0675000000000011,
+        "is_active": false
+      },
+      {
+        "id": 101,
+        "type": "hidden",
+        "membrane_potential": -0.0003053178410205455,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.3150000000000018,
+        "is_active": false
+      },
+      {
+        "id": 102,
+        "type": "hidden",
+        "membrane_potential": -0.0006784779671449652,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.6175000000000016,
+        "is_active": false
+      },
+      {
+        "id": 103,
+        "type": "hidden",
+        "membrane_potential": -0.010809345037988891,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -1.6669999999999288,
+        "is_active": false
+      },
+      {
+        "id": 104,
+        "type": "hidden",
+        "membrane_potential": -4.1954900914009525e-07,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -2.634999999999822,
+        "is_active": false
+      },
+      {
+        "id": 105,
+        "type": "hidden",
+        "membrane_potential": -0.0005024818630082431,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.9530000000000018,
+        "is_active": false
+      },
+      {
+        "id": 106,
+        "type": "hidden",
+        "membrane_potential": -0.0003596937420398506,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.1100000000000012,
+        "is_active": false
+      },
+      {
+        "id": 107,
+        "type": "hidden",
+        "membrane_potential": -5.4108962647271986e-05,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -1.1699999999999837,
+        "is_active": false
+      },
+      {
+        "id": 108,
+        "type": "hidden",
+        "membrane_potential": 2.7052314148470903e-05,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.172500000000002,
+        "is_active": false
+      },
+      {
+        "id": 109,
+        "type": "hidden",
+        "membrane_potential": -1.0600789603048853e-07,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.12500000000000097,
+        "is_active": false
+      },
+      {
+        "id": 110,
+        "type": "hidden",
+        "membrane_potential": -2.3535737398392697e-05,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -2.1979999999998707,
+        "is_active": false
+      },
+      {
+        "id": 111,
+        "type": "hidden",
+        "membrane_potential": -0.0027855614782533334,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.06550000000000099,
+        "is_active": false
+      },
+      {
+        "id": 112,
+        "type": "hidden",
+        "membrane_potential": 0.00022055216168024753,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -2.1034999999998805,
+        "is_active": false
+      },
+      {
+        "id": 113,
+        "type": "hidden",
+        "membrane_potential": -2.2298708276577629e-13,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -1.1669999999999832,
+        "is_active": false
+      },
+      {
+        "id": 114,
+        "type": "hidden",
+        "membrane_potential": 4.291538176667153e-11,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -1.0224999999999993,
+        "is_active": false
+      },
+      {
+        "id": 115,
+        "type": "hidden",
+        "membrane_potential": 0.0005259895035953914,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -2.915499999999792,
+        "is_active": false
+      },
+      {
+        "id": 116,
+        "type": "hidden",
+        "membrane_potential": 0.002599570624240185,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -1.5949999999999362,
+        "is_active": false
+      },
+      {
+        "id": 117,
+        "type": "hidden",
+        "membrane_potential": -4.253213691788943e-05,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -1.1649999999999843,
+        "is_active": false
+      },
+      {
+        "id": 118,
+        "type": "hidden",
+        "membrane_potential": 3.531844108130053e-13,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.12750000000000203,
+        "is_active": false
+      },
+      {
+        "id": 119,
+        "type": "hidden",
+        "membrane_potential": 0.0007817692351818038,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.5745000000000016,
+        "is_active": false
+      },
+      {
+        "id": 120,
+        "type": "hidden",
+        "membrane_potential": 2.6599019775627677e-17,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": 0.08899999999999919,
+        "is_active": false
+      },
+      {
+        "id": 121,
+        "type": "hidden",
+        "membrane_potential": 0.0006962804877555225,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -1.7644999999999176,
+        "is_active": false
+      },
+      {
+        "id": 122,
+        "type": "hidden",
+        "membrane_potential": 0.00023255704777930966,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.10200000000000119,
+        "is_active": false
+      },
+      {
+        "id": 123,
+        "type": "hidden",
+        "membrane_potential": 0.0007186137785798286,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.08800000000000095,
+        "is_active": false
+      },
+      {
+        "id": 124,
+        "type": "hidden",
+        "membrane_potential": 0.004942697176552652,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": 0.02949999999999897,
+        "is_active": false
+      },
+      {
+        "id": 125,
+        "type": "hidden",
+        "membrane_potential": 0.0008546396972113214,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": 0.08899999999999908,
+        "is_active": false
+      },
+      {
+        "id": 126,
+        "type": "hidden",
+        "membrane_potential": -0.0011832487462989949,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.4425000000000021,
+        "is_active": false
+      },
+      {
+        "id": 127,
+        "type": "hidden",
+        "membrane_potential": 0.00024434959882171556,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": 0.00699999999999873,
+        "is_active": false
+      },
+      {
+        "id": 128,
+        "type": "hidden",
+        "membrane_potential": -1.9496534603244076e-06,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.8385000000000018,
+        "is_active": false
+      },
+      {
+        "id": 129,
+        "type": "hidden",
+        "membrane_potential": 4.2668575255856105e-05,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -1.5734999999999386,
+        "is_active": false
+      },
+      {
+        "id": 130,
+        "type": "hidden",
+        "membrane_potential": -2.4815435778250156e-10,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": 0.011499999999999011,
+        "is_active": false
+      },
+      {
+        "id": 131,
+        "type": "hidden",
+        "membrane_potential": -0.00021861656889559048,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.2525000000000017,
+        "is_active": false
+      },
+      {
+        "id": 132,
+        "type": "hidden",
+        "membrane_potential": 0.00011713973772398087,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -1.2514999999999743,
+        "is_active": false
+      },
+      {
+        "id": 133,
+        "type": "hidden",
+        "membrane_potential": 3.326874843652585e-05,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.24500000000000108,
+        "is_active": false
+      },
+      {
+        "id": 134,
+        "type": "hidden",
+        "membrane_potential": -0.003301868312647195,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.005500000000000881,
+        "is_active": false
+      },
+      {
+        "id": 135,
+        "type": "hidden",
+        "membrane_potential": -0.0001399968440242957,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.31050000000000144,
+        "is_active": false
+      },
+      {
+        "id": 136,
+        "type": "hidden",
+        "membrane_potential": -0.0001824520200579116,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.02600000000000112,
+        "is_active": false
+      },
+      {
+        "id": 137,
+        "type": "hidden",
+        "membrane_potential": 0.00021899788315948266,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -1.7804999999999171,
+        "is_active": false
+      },
+      {
+        "id": 138,
+        "type": "hidden",
+        "membrane_potential": -0.00012858085524788775,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.5315000000000036,
+        "is_active": false
+      },
+      {
+        "id": 139,
+        "type": "hidden",
+        "membrane_potential": -0.0047110857056508765,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": 0.0009999999999989522,
+        "is_active": false
+      },
+      {
+        "id": 140,
+        "type": "hidden",
+        "membrane_potential": 0.0015218565239106469,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.2880000000000011,
+        "is_active": false
+      },
+      {
+        "id": 141,
+        "type": "hidden",
+        "membrane_potential": -0.00542552550746862,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": 0.045499999999998986,
+        "is_active": false
+      },
+      {
+        "id": 142,
+        "type": "hidden",
+        "membrane_potential": 0.00011410210553519976,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -1.5059999999999463,
+        "is_active": false
+      },
+      {
+        "id": 143,
+        "type": "hidden",
+        "membrane_potential": -0.027284135061679,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.20450000000000143,
+        "is_active": false
+      },
+      {
+        "id": 144,
+        "type": "hidden",
+        "membrane_potential": -1.3321897812579431e-12,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -1.078999999999994,
+        "is_active": false
+      },
+      {
+        "id": 145,
+        "type": "hidden",
+        "membrane_potential": 9.799857383251146e-06,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -1.38099999999996,
+        "is_active": false
+      },
+      {
+        "id": 146,
+        "type": "hidden",
+        "membrane_potential": 1.8958123608720695e-05,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.5290000000000014,
+        "is_active": false
+      },
+      {
+        "id": 147,
+        "type": "hidden",
+        "membrane_potential": -0.00016240862397778723,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.165000000000001,
+        "is_active": false
+      },
+      {
+        "id": 148,
+        "type": "hidden",
+        "membrane_potential": 0.010609610406749754,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.05250000000000092,
+        "is_active": false
+      },
+      {
+        "id": 149,
+        "type": "hidden",
+        "membrane_potential": -0.0007157365913252655,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.04000000000000213,
+        "is_active": false
+      },
+      {
+        "id": 150,
+        "type": "hidden",
+        "membrane_potential": -0.00014090715449713073,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.33250000000000157,
+        "is_active": false
+      },
+      {
+        "id": 151,
+        "type": "hidden",
+        "membrane_potential": 0.0006674996502003287,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.6365000000000015,
+        "is_active": false
+      },
+      {
+        "id": 152,
+        "type": "hidden",
+        "membrane_potential": -1.8506385786559504e-09,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.12050000000000193,
+        "is_active": false
+      },
+      {
+        "id": 153,
+        "type": "hidden",
+        "membrane_potential": -0.0007850446688352892,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.9405000000000022,
+        "is_active": false
+      },
+      {
+        "id": 154,
+        "type": "hidden",
+        "membrane_potential": 0.0018239508169745754,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.050500000000001474,
+        "is_active": false
+      },
+      {
+        "id": 155,
+        "type": "hidden",
+        "membrane_potential": -1.2931570784161152e-11,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.6700000000000016,
+        "is_active": false
+      },
+      {
+        "id": 156,
+        "type": "hidden",
+        "membrane_potential": -0.0030323121935652664,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.148000000000001,
+        "is_active": false
+      },
+      {
+        "id": 157,
+        "type": "hidden",
+        "membrane_potential": 1.1684384630962128e-05,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.31000000000000233,
+        "is_active": false
+      },
+      {
+        "id": 158,
+        "type": "hidden",
+        "membrane_potential": 8.240653668280514e-05,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.4615000000000013,
+        "is_active": false
+      },
+      {
+        "id": 159,
+        "type": "hidden",
+        "membrane_potential": 6.988409300099787e-06,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -2.0504999999998863,
+        "is_active": false
+      },
+      {
+        "id": 160,
+        "type": "hidden",
+        "membrane_potential": -0.0002033322393105281,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -1.495499999999947,
+        "is_active": false
+      },
+      {
+        "id": 161,
+        "type": "hidden",
+        "membrane_potential": 0.00045743972973568244,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.7615000000000025,
+        "is_active": false
+      },
+      {
+        "id": 162,
+        "type": "hidden",
+        "membrane_potential": 0.0001049139571388829,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.9725000000000028,
+        "is_active": false
+      },
+      {
+        "id": 163,
+        "type": "hidden",
+        "membrane_potential": 0.0012530216635942065,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.5785000000000013,
+        "is_active": false
+      },
+      {
+        "id": 164,
+        "type": "hidden",
+        "membrane_potential": 3.0827357381545306e-06,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.9070000000000019,
+        "is_active": false
+      },
+      {
+        "id": 165,
+        "type": "hidden",
+        "membrane_potential": 0.007360153757496094,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -1.0614999999999954,
+        "is_active": false
+      },
+      {
+        "id": 166,
+        "type": "hidden",
+        "membrane_potential": -0.006986369681016532,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.35250000000000115,
+        "is_active": false
+      },
+      {
+        "id": 167,
+        "type": "hidden",
+        "membrane_potential": -0.0001130537388599937,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -1.7594999999999186,
+        "is_active": false
+      },
+      {
+        "id": 168,
+        "type": "hidden",
+        "membrane_potential": -0.00020587109638002082,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -3.113499999999768,
+        "is_active": false
+      },
+      {
+        "id": 169,
+        "type": "hidden",
+        "membrane_potential": -1.0391611880792557e-05,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -1.681999999999928,
+        "is_active": false
+      },
+      {
+        "id": 170,
+        "type": "hidden",
+        "membrane_potential": 0.0010352815564750777,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -2.2209999999998664,
+        "is_active": false
+      },
+      {
+        "id": 171,
+        "type": "hidden",
+        "membrane_potential": -0.009353186282789607,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -1.0105000000000006,
+        "is_active": false
+      },
+      {
+        "id": 172,
+        "type": "hidden",
+        "membrane_potential": 6.771992406372066e-07,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.5230000000000012,
+        "is_active": false
+      },
+      {
+        "id": 173,
+        "type": "hidden",
+        "membrane_potential": -0.0007767748972140546,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.5775000000000021,
+        "is_active": false
+      },
+      {
+        "id": 174,
+        "type": "hidden",
+        "membrane_potential": 0.00011726954683040979,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -1.906999999999902,
+        "is_active": false
+      },
+      {
+        "id": 175,
+        "type": "hidden",
+        "membrane_potential": 0.0010949017262977387,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.22650000000000134,
+        "is_active": false
+      },
+      {
+        "id": 176,
+        "type": "hidden",
+        "membrane_potential": -0.0012181468220693464,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.48000000000000126,
+        "is_active": false
+      },
+      {
+        "id": 177,
+        "type": "hidden",
+        "membrane_potential": -8.854210909173656e-11,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -1.7564999999999187,
+        "is_active": false
+      },
+      {
+        "id": 178,
+        "type": "hidden",
+        "membrane_potential": -0.0014957025311726473,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -2.737999999999811,
+        "is_active": false
+      },
+      {
+        "id": 179,
+        "type": "hidden",
+        "membrane_potential": -3.3597444155120666e-06,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -1.664999999999931,
+        "is_active": false
+      },
+      {
+        "id": 180,
+        "type": "hidden",
+        "membrane_potential": -4.565704009077479e-10,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.5315000000000013,
+        "is_active": false
+      },
+      {
+        "id": 181,
+        "type": "hidden",
+        "membrane_potential": 9.538509960180478e-08,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.40150000000000213,
+        "is_active": false
+      },
+      {
+        "id": 182,
+        "type": "hidden",
+        "membrane_potential": -0.004569825480603832,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.4710000000000016,
+        "is_active": false
+      },
+      {
+        "id": 183,
+        "type": "hidden",
+        "membrane_potential": 0.016896173931226364,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.26300000000000107,
+        "is_active": false
+      },
+      {
+        "id": 184,
+        "type": "hidden",
+        "membrane_potential": -0.003366941998317472,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.5400000000000024,
+        "is_active": false
+      },
+      {
+        "id": 185,
+        "type": "hidden",
+        "membrane_potential": 0.01358540899842301,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.5585000000000023,
+        "is_active": false
+      },
+      {
+        "id": 186,
+        "type": "hidden",
+        "membrane_potential": 2.1754121892034686e-05,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": 0.006499999999998897,
+        "is_active": false
+      },
+      {
+        "id": 187,
+        "type": "hidden",
+        "membrane_potential": -0.0013801816557505015,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.9255000000000017,
+        "is_active": false
+      },
+      {
+        "id": 188,
+        "type": "hidden",
+        "membrane_potential": 0.023000385389471474,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.7255000000000023,
+        "is_active": false
+      },
+      {
+        "id": 189,
+        "type": "hidden",
+        "membrane_potential": -0.00026183380647581186,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.5345000000000014,
+        "is_active": false
+      },
+      {
+        "id": 190,
+        "type": "hidden",
+        "membrane_potential": -0.0006036398201620568,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": 0.06299999999999917,
+        "is_active": false
+      },
+      {
+        "id": 191,
+        "type": "hidden",
+        "membrane_potential": -4.889558809422791e-05,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": 0.013499999999998957,
+        "is_active": false
+      },
+      {
+        "id": 192,
+        "type": "hidden",
+        "membrane_potential": 2.2865006185245813e-09,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.5840000000000016,
+        "is_active": false
+      },
+      {
+        "id": 193,
+        "type": "hidden",
+        "membrane_potential": -1.826554787157226e-08,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.8670000000000034,
+        "is_active": false
+      },
+      {
+        "id": 194,
+        "type": "hidden",
+        "membrane_potential": -0.003153347037128842,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.41350000000000187,
+        "is_active": false
+      },
+      {
+        "id": 195,
+        "type": "hidden",
+        "membrane_potential": 1.7411963081763967e-08,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.4130000000000016,
+        "is_active": false
+      },
+      {
+        "id": 196,
+        "type": "hidden",
+        "membrane_potential": -0.00028061332802527554,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.6280000000000026,
+        "is_active": false
+      },
+      {
+        "id": 197,
+        "type": "hidden",
+        "membrane_potential": -0.002921136769471299,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.6270000000000013,
+        "is_active": false
+      },
+      {
+        "id": 198,
+        "type": "hidden",
+        "membrane_potential": 7.550691994157091e-06,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": 0.08099999999999885,
+        "is_active": false
+      },
+      {
+        "id": 199,
+        "type": "hidden",
+        "membrane_potential": -0.0004989607479277879,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.018500000000001113,
+        "is_active": false
+      },
+      {
+        "id": 200,
+        "type": "hidden",
+        "membrane_potential": -5.9970268334083456e-12,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -1.2164999999999788,
+        "is_active": false
+      },
+      {
+        "id": 201,
+        "type": "hidden",
+        "membrane_potential": -0.0005250423419965883,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": 0.048999999999999155,
+        "is_active": false
+      },
+      {
+        "id": 202,
+        "type": "hidden",
+        "membrane_potential": 7.3354662476256225e-09,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": 0.060999999999998944,
+        "is_active": false
+      },
+      {
+        "id": 203,
+        "type": "hidden",
+        "membrane_potential": 0.0025718532617482457,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": 0.016999999999999127,
+        "is_active": false
+      },
+      {
+        "id": 204,
+        "type": "hidden",
+        "membrane_potential": 0.002595343703440125,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.11300000000000097,
+        "is_active": false
+      },
+      {
+        "id": 205,
+        "type": "hidden",
+        "membrane_potential": -1.0536576809341639e-07,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -1.866499999999908,
+        "is_active": false
+      },
+      {
+        "id": 206,
+        "type": "hidden",
+        "membrane_potential": -0.000857320722073226,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -1.7469999999999195,
+        "is_active": false
+      },
+      {
+        "id": 207,
+        "type": "hidden",
+        "membrane_potential": 7.931654109803209e-05,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.9335000000000027,
+        "is_active": false
+      },
+      {
+        "id": 208,
+        "type": "hidden",
+        "membrane_potential": 0.004816149918010165,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.9650000000000021,
+        "is_active": false
+      },
+      {
+        "id": 209,
+        "type": "hidden",
+        "membrane_potential": -0.008700397980109891,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.3810000000000013,
+        "is_active": false
+      },
+      {
+        "id": 210,
+        "type": "hidden",
+        "membrane_potential": -0.00036315791094883684,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.4140000000000016,
+        "is_active": false
+      },
+      {
+        "id": 211,
+        "type": "hidden",
+        "membrane_potential": 9.544831345734016e-06,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.35900000000000115,
+        "is_active": false
+      },
+      {
+        "id": 212,
+        "type": "hidden",
+        "membrane_potential": -0.0005905702926568931,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -4.1399999999997155,
+        "is_active": false
+      },
+      {
+        "id": 213,
+        "type": "hidden",
+        "membrane_potential": -0.0015107518212669551,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.043000000000001024,
+        "is_active": false
+      },
+      {
+        "id": 214,
+        "type": "hidden",
+        "membrane_potential": 0.002081666095463538,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.31050000000000155,
+        "is_active": false
+      },
+      {
+        "id": 215,
+        "type": "hidden",
+        "membrane_potential": -0.018609254550361578,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.1360000000000011,
+        "is_active": false
+      },
+      {
+        "id": 216,
+        "type": "hidden",
+        "membrane_potential": 7.727355705329946e-06,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.07950000000000111,
+        "is_active": false
+      },
+      {
+        "id": 217,
+        "type": "hidden",
+        "membrane_potential": 1.1781712250157099e-05,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.1885000000000012,
+        "is_active": false
+      },
+      {
+        "id": 218,
+        "type": "hidden",
+        "membrane_potential": 0.001021686221099294,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.07000000000000138,
+        "is_active": false
+      },
+      {
+        "id": 219,
+        "type": "hidden",
+        "membrane_potential": 9.643393114201757e-05,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.3080000000000011,
+        "is_active": false
+      },
+      {
+        "id": 220,
+        "type": "hidden",
+        "membrane_potential": -0.001783557744865587,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": 0.012499999999997402,
+        "is_active": false
+      },
+      {
+        "id": 221,
+        "type": "hidden",
+        "membrane_potential": 7.286589072707875e-12,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -2.9259999999997888,
+        "is_active": false
+      },
+      {
+        "id": 222,
+        "type": "hidden",
+        "membrane_potential": 5.3821995226857614e-11,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.20700000000000127,
+        "is_active": false
+      },
+      {
+        "id": 223,
+        "type": "hidden",
+        "membrane_potential": -0.0004295257455412609,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": 0.02799999999999858,
+        "is_active": false
+      },
+      {
+        "id": 224,
+        "type": "hidden",
+        "membrane_potential": 3.7127017167872126e-11,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.48600000000000126,
+        "is_active": false
+      },
+      {
+        "id": 225,
+        "type": "hidden",
+        "membrane_potential": -0.001142829673452212,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -1.1459999999999868,
+        "is_active": false
+      },
+      {
+        "id": 226,
+        "type": "hidden",
+        "membrane_potential": 4.1187499141296055e-05,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.6030000000000015,
+        "is_active": false
+      },
+      {
+        "id": 227,
+        "type": "hidden",
+        "membrane_potential": 7.715633151958048e-05,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.04850000000000125,
+        "is_active": false
+      },
+      {
+        "id": 228,
+        "type": "hidden",
+        "membrane_potential": 1.6230011724119466e-07,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.7730000000000018,
+        "is_active": false
+      },
+      {
+        "id": 229,
+        "type": "hidden",
+        "membrane_potential": -0.006549841291030915,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.3240000000000011,
+        "is_active": false
+      },
+      {
+        "id": 230,
+        "type": "hidden",
+        "membrane_potential": -2.074120495419447e-05,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.45100000000000134,
+        "is_active": false
+      },
+      {
+        "id": 231,
+        "type": "hidden",
+        "membrane_potential": -0.01495617144416253,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.03200000000000157,
+        "is_active": false
+      },
+      {
+        "id": 232,
+        "type": "hidden",
+        "membrane_potential": 0.0012190128814569524,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.5280000000000022,
+        "is_active": false
+      },
+      {
+        "id": 233,
+        "type": "hidden",
+        "membrane_potential": 3.0428216975685254e-10,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -1.6624999999999295,
+        "is_active": false
+      },
+      {
+        "id": 234,
+        "type": "hidden",
+        "membrane_potential": -0.00015565742038749797,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -2.498999999999836,
+        "is_active": false
+      },
+      {
+        "id": 235,
+        "type": "hidden",
+        "membrane_potential": -0.011935265906795948,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -2.581499999999826,
+        "is_active": false
+      },
+      {
+        "id": 236,
+        "type": "hidden",
+        "membrane_potential": 0.0004786997209015214,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.024000000000001284,
+        "is_active": false
+      },
+      {
+        "id": 237,
+        "type": "hidden",
+        "membrane_potential": -0.0003091530231994329,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.6330000000000013,
+        "is_active": false
+      },
+      {
+        "id": 238,
+        "type": "hidden",
+        "membrane_potential": 3.670069918818793e-08,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.01900000000000189,
+        "is_active": false
+      },
+      {
+        "id": 239,
+        "type": "hidden",
+        "membrane_potential": -0.00014110411921411985,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -1.0874999999999921,
+        "is_active": false
+      },
+      {
+        "id": 240,
+        "type": "hidden",
+        "membrane_potential": 4.499501936275762e-06,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": 0.09999999999999809,
+        "is_active": false
+      },
+      {
+        "id": 241,
+        "type": "hidden",
+        "membrane_potential": -2.4957806385535505e-07,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -2.870999999999796,
+        "is_active": false
+      },
+      {
+        "id": 242,
+        "type": "hidden",
+        "membrane_potential": 0.004385217333474136,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.34350000000000136,
+        "is_active": false
+      },
+      {
+        "id": 243,
+        "type": "hidden",
+        "membrane_potential": 0.0011714326954368754,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -2.0599999999998855,
+        "is_active": false
+      },
+      {
+        "id": 244,
+        "type": "hidden",
+        "membrane_potential": -3.973766984373991e-09,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -1.7239999999999225,
+        "is_active": false
+      },
+      {
+        "id": 245,
+        "type": "hidden",
+        "membrane_potential": 0.0051523286891704614,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -2.524499999999833,
+        "is_active": false
+      },
+      {
+        "id": 246,
+        "type": "hidden",
+        "membrane_potential": 1.0314157705337275e-06,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.5785000000000019,
+        "is_active": false
+      },
+      {
+        "id": 247,
+        "type": "hidden",
+        "membrane_potential": -2.5283844174574412e-05,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": 0.04249999999999704,
+        "is_active": false
+      },
+      {
+        "id": 248,
+        "type": "hidden",
+        "membrane_potential": 2.3359377318914148e-05,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.09850000000000118,
+        "is_active": false
+      },
+      {
+        "id": 249,
+        "type": "hidden",
+        "membrane_potential": -0.0006376553086593181,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -1.5189999999999462,
+        "is_active": false
+      },
+      {
+        "id": 250,
+        "type": "hidden",
+        "membrane_potential": 2.5078418124673038e-05,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.34650000000000114,
+        "is_active": false
+      },
+      {
+        "id": 251,
+        "type": "hidden",
+        "membrane_potential": -0.000631754039116479,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.6100000000000013,
+        "is_active": false
+      },
+      {
+        "id": 252,
+        "type": "hidden",
+        "membrane_potential": 0.004330432472500159,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -1.7809999999999169,
+        "is_active": false
+      },
+      {
+        "id": 253,
+        "type": "hidden",
+        "membrane_potential": -0.00896584707830868,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.38600000000000134,
+        "is_active": false
+      },
+      {
+        "id": 254,
+        "type": "hidden",
+        "membrane_potential": -7.795007930534016e-06,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -2.141999999999878,
+        "is_active": false
+      },
+      {
+        "id": 255,
+        "type": "hidden",
+        "membrane_potential": 1.2427776620493631e-11,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": 0.02799999999999897,
+        "is_active": false
+      },
+      {
+        "id": 256,
+        "type": "hidden",
+        "membrane_potential": 3.653692488659914e-06,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.7145000000000017,
+        "is_active": false
+      },
+      {
+        "id": 257,
+        "type": "hidden",
+        "membrane_potential": -0.00013351225574173613,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.10500000000000158,
+        "is_active": false
+      },
+      {
+        "id": 258,
+        "type": "hidden",
+        "membrane_potential": -7.248469083708416e-05,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.06550000000000093,
+        "is_active": false
+      },
+      {
+        "id": 259,
+        "type": "hidden",
+        "membrane_potential": -0.0002230287343204514,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.143000000000001,
+        "is_active": false
+      },
+      {
+        "id": 260,
+        "type": "hidden",
+        "membrane_potential": -0.007060052684360827,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -1.5639999999999405,
+        "is_active": false
+      },
+      {
+        "id": 261,
+        "type": "hidden",
+        "membrane_potential": 5.771580882380759e-08,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.151500000000001,
+        "is_active": false
+      },
+      {
+        "id": 262,
+        "type": "hidden",
+        "membrane_potential": -0.001168934913757047,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -1.2554999999999765,
+        "is_active": false
+      },
+      {
+        "id": 263,
+        "type": "hidden",
+        "membrane_potential": -0.0005980285440663054,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -4.017499999999676,
+        "is_active": false
+      },
+      {
+        "id": 264,
+        "type": "hidden",
+        "membrane_potential": -0.0010959367991914312,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.9750000000000025,
+        "is_active": false
+      },
+      {
+        "id": 265,
+        "type": "hidden",
+        "membrane_potential": 3.2379319361875516e-12,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -1.060999999999995,
+        "is_active": false
+      },
+      {
+        "id": 266,
+        "type": "hidden",
+        "membrane_potential": 0.00013264326793250138,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -1.4374999999999536,
+        "is_active": false
+      },
+      {
+        "id": 267,
+        "type": "hidden",
+        "membrane_potential": -0.000507877526042184,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.8865000000000021,
+        "is_active": false
+      },
+      {
+        "id": 268,
+        "type": "hidden",
+        "membrane_potential": 0.00010818350281690193,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.5545000000000021,
+        "is_active": false
+      },
+      {
+        "id": 269,
+        "type": "hidden",
+        "membrane_potential": 1.317351057752782e-13,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -1.8919999999999042,
+        "is_active": false
+      },
+      {
+        "id": 270,
+        "type": "hidden",
+        "membrane_potential": 0.000436374481705658,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -1.4149999999999574,
+        "is_active": false
+      },
+      {
+        "id": 271,
+        "type": "hidden",
+        "membrane_potential": -7.55376319836414e-12,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.9270000000000017,
+        "is_active": false
+      },
+      {
+        "id": 272,
+        "type": "hidden",
+        "membrane_potential": -5.316767999197382e-05,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -1.0999999999999914,
+        "is_active": false
+      },
+      {
+        "id": 273,
+        "type": "hidden",
+        "membrane_potential": -0.0001920736701855329,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": 0.05399999999999899,
+        "is_active": false
+      },
+      {
+        "id": 274,
+        "type": "hidden",
+        "membrane_potential": 0.0002817225399879413,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -1.5579999999999405,
+        "is_active": false
+      },
+      {
+        "id": 275,
+        "type": "hidden",
+        "membrane_potential": -0.006638982840012501,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.4605000000000016,
+        "is_active": false
+      },
+      {
+        "id": 276,
+        "type": "hidden",
+        "membrane_potential": -3.125258058375521e-05,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.11150000000000147,
+        "is_active": false
+      },
+      {
+        "id": 277,
+        "type": "hidden",
+        "membrane_potential": 0.0074788470659806665,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -1.314999999999967,
+        "is_active": false
+      },
+      {
+        "id": 278,
+        "type": "hidden",
+        "membrane_potential": 5.030397474067762e-05,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.06150000000000093,
+        "is_active": false
+      },
+      {
+        "id": 279,
+        "type": "hidden",
+        "membrane_potential": -6.141788095009717e-05,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.35750000000000165,
+        "is_active": false
+      },
+      {
+        "id": 280,
+        "type": "hidden",
+        "membrane_potential": -2.9872298561620503e-05,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.2970000000000011,
+        "is_active": false
+      },
+      {
+        "id": 281,
+        "type": "hidden",
+        "membrane_potential": 1.1361428580385535e-05,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.5170000000000012,
+        "is_active": false
+      },
+      {
+        "id": 282,
+        "type": "hidden",
+        "membrane_potential": -0.00023236090806653495,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -1.753499999999919,
+        "is_active": false
+      },
+      {
+        "id": 283,
+        "type": "hidden",
+        "membrane_potential": -0.0021874919877084625,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.578000000000002,
+        "is_active": false
+      },
+      {
+        "id": 284,
+        "type": "hidden",
+        "membrane_potential": -0.0006312039493955864,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.020500000000001004,
+        "is_active": false
+      },
+      {
+        "id": 285,
+        "type": "hidden",
+        "membrane_potential": -0.0005588199612772447,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -2.5494999999998313,
+        "is_active": false
+      },
+      {
+        "id": 286,
+        "type": "hidden",
+        "membrane_potential": -1.7945898796855478e-07,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.6545000000000014,
+        "is_active": false
+      },
+      {
+        "id": 287,
+        "type": "hidden",
+        "membrane_potential": 0.0014044497777080912,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -2.7069999999998133,
+        "is_active": false
+      },
+      {
+        "id": 288,
+        "type": "hidden",
+        "membrane_potential": -0.00038911342829706336,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -1.2779999999999714,
+        "is_active": false
+      },
+      {
+        "id": 289,
+        "type": "hidden",
+        "membrane_potential": -5.870711249570136e-05,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.6875000000000023,
+        "is_active": false
+      },
+      {
+        "id": 290,
+        "type": "hidden",
+        "membrane_potential": 0.006223862730169925,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -1.5209999999999466,
+        "is_active": false
+      },
+      {
+        "id": 291,
+        "type": "hidden",
+        "membrane_potential": -0.0012651702123915585,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.3730000000000025,
+        "is_active": false
+      },
+      {
+        "id": 292,
+        "type": "hidden",
+        "membrane_potential": -2.0712399130195135e-06,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.25600000000000145,
+        "is_active": false
+      },
+      {
+        "id": 293,
+        "type": "hidden",
+        "membrane_potential": -0.0018303011971407873,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -1.2369999999999761,
+        "is_active": false
+      },
+      {
+        "id": 294,
+        "type": "hidden",
+        "membrane_potential": 1.12699366694858e-05,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -2.0619999999998853,
+        "is_active": false
+      },
+      {
+        "id": 295,
+        "type": "hidden",
+        "membrane_potential": 7.128324872550024e-05,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.8990000000000016,
+        "is_active": false
+      },
+      {
+        "id": 296,
+        "type": "hidden",
+        "membrane_potential": -9.447382613442289e-05,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.04500000000000147,
+        "is_active": false
+      },
+      {
+        "id": 297,
+        "type": "hidden",
+        "membrane_potential": -0.012111397418916373,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -1.553499999999942,
+        "is_active": false
+      },
+      {
+        "id": 298,
+        "type": "hidden",
+        "membrane_potential": 1.3885699121308634e-07,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.3875000000000012,
+        "is_active": false
+      },
+      {
+        "id": 299,
+        "type": "hidden",
+        "membrane_potential": -2.3287868309559307e-05,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.7840000000000021,
+        "is_active": false
+      },
+      {
+        "id": 300,
+        "type": "hidden",
+        "membrane_potential": 0.0015694800168563159,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.9275000000000018,
+        "is_active": false
+      },
+      {
+        "id": 301,
+        "type": "hidden",
+        "membrane_potential": -1.050370024769396e-06,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.9000000000000021,
+        "is_active": false
+      },
+      {
+        "id": 302,
+        "type": "hidden",
+        "membrane_potential": -2.965170277465562e-07,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.45400000000000146,
+        "is_active": false
+      },
+      {
+        "id": 303,
+        "type": "hidden",
+        "membrane_potential": -0.0017975408861743477,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -2.9759999999997824,
+        "is_active": false
+      },
+      {
+        "id": 304,
+        "type": "hidden",
+        "membrane_potential": 0.0030801834403634894,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -2.444499999999842,
+        "is_active": false
+      },
+      {
+        "id": 305,
+        "type": "hidden",
+        "membrane_potential": 6.951414613042167e-09,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.8715000000000016,
+        "is_active": false
+      },
+      {
+        "id": 306,
+        "type": "hidden",
+        "membrane_potential": -0.0005088226672069526,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -1.0205000000000002,
+        "is_active": false
+      },
+      {
+        "id": 307,
+        "type": "hidden",
+        "membrane_potential": -0.0023167587938703665,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.8045000000000019,
+        "is_active": false
+      },
+      {
+        "id": 308,
+        "type": "hidden",
+        "membrane_potential": 1.5759056643325746e-10,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.5600000000000016,
+        "is_active": false
+      },
+      {
+        "id": 309,
+        "type": "hidden",
+        "membrane_potential": -5.543172077000661e-08,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.09650000000000124,
+        "is_active": false
+      },
+      {
+        "id": 310,
+        "type": "hidden",
+        "membrane_potential": -0.0009268580947636406,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.09300000000000185,
+        "is_active": false
+      },
+      {
+        "id": 311,
+        "type": "hidden",
+        "membrane_potential": -0.0018117109976046963,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.8475000000000019,
+        "is_active": false
+      },
+      {
+        "id": 312,
+        "type": "hidden",
+        "membrane_potential": 0.0011705843269900107,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.08400000000000095,
+        "is_active": false
+      },
+      {
+        "id": 313,
+        "type": "hidden",
+        "membrane_potential": -0.0018445862293975134,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": 0.013499999999998735,
+        "is_active": false
+      },
+      {
+        "id": 314,
+        "type": "hidden",
+        "membrane_potential": -0.009209449051233415,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -1.0175000000000005,
+        "is_active": false
+      },
+      {
+        "id": 315,
+        "type": "hidden",
+        "membrane_potential": 0.00012007357347789789,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.3245000000000013,
+        "is_active": false
+      },
+      {
+        "id": 316,
+        "type": "hidden",
+        "membrane_potential": -0.004982695743658725,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.12450000000000115,
+        "is_active": false
+      },
+      {
+        "id": 317,
+        "type": "hidden",
+        "membrane_potential": 0.008235485339605523,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -1.232999999999977,
+        "is_active": false
+      },
+      {
+        "id": 318,
+        "type": "hidden",
+        "membrane_potential": -9.303626208116998e-06,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.36450000000000116,
+        "is_active": false
+      },
+      {
+        "id": 319,
+        "type": "hidden",
+        "membrane_potential": -0.003434883963849464,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -2.0154999999998906,
+        "is_active": false
+      },
+      {
+        "id": 320,
+        "type": "hidden",
+        "membrane_potential": 7.152780808557073e-08,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.2375000000000018,
+        "is_active": false
+      },
+      {
+        "id": 321,
+        "type": "hidden",
+        "membrane_potential": -0.010532135415750602,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.058000000000000926,
+        "is_active": false
+      },
+      {
+        "id": 322,
+        "type": "hidden",
+        "membrane_potential": 3.7376067133688083e-05,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.8680000000000029,
+        "is_active": false
+      },
+      {
+        "id": 323,
+        "type": "hidden",
+        "membrane_potential": 0.0021040941165477354,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -2.8389999999998006,
+        "is_active": false
+      },
+      {
+        "id": 324,
+        "type": "hidden",
+        "membrane_potential": -0.013216067645820702,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.4335000000000022,
+        "is_active": false
+      },
+      {
+        "id": 325,
+        "type": "hidden",
+        "membrane_potential": 3.0610647512837805e-06,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.2435000000000028,
+        "is_active": false
+      },
+      {
+        "id": 326,
+        "type": "hidden",
+        "membrane_potential": -0.013233500759062785,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.13750000000000098,
+        "is_active": false
+      },
+      {
+        "id": 327,
+        "type": "hidden",
+        "membrane_potential": 0.005623390036783856,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -2.474499999999839,
+        "is_active": false
+      },
+      {
+        "id": 328,
+        "type": "hidden",
+        "membrane_potential": -0.002730661142525368,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.07050000000000099,
+        "is_active": false
+      },
+      {
+        "id": 329,
+        "type": "hidden",
+        "membrane_potential": 0.0006037207986792275,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": 0.010499999999998955,
+        "is_active": false
+      },
+      {
+        "id": 330,
+        "type": "hidden",
+        "membrane_potential": 0.0035460735370447596,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.963500000000002,
+        "is_active": false
+      },
+      {
+        "id": 331,
+        "type": "hidden",
+        "membrane_potential": -5.6252130843194566e-08,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.2210000000000015,
+        "is_active": false
+      },
+      {
+        "id": 332,
+        "type": "hidden",
+        "membrane_potential": 0.0030586021413976632,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -1.1779999999999824,
+        "is_active": false
+      },
+      {
+        "id": 333,
+        "type": "hidden",
+        "membrane_potential": 0.0050059972707853385,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.1290000000000012,
+        "is_active": false
+      },
+      {
+        "id": 334,
+        "type": "hidden",
+        "membrane_potential": 0.0004967414836801009,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.6550000000000016,
+        "is_active": false
+      },
+      {
+        "id": 335,
+        "type": "hidden",
+        "membrane_potential": -0.0010373029433013506,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -1.7549999999999188,
+        "is_active": false
+      },
+      {
+        "id": 336,
+        "type": "hidden",
+        "membrane_potential": 0.0065071920253045,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.08250000000000145,
+        "is_active": false
+      },
+      {
+        "id": 337,
+        "type": "hidden",
+        "membrane_potential": -4.263793920929813e-08,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.9340000000000016,
+        "is_active": false
+      },
+      {
+        "id": 338,
+        "type": "hidden",
+        "membrane_potential": -0.006211041373912761,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -1.8034999999999133,
+        "is_active": false
+      },
+      {
+        "id": 339,
+        "type": "hidden",
+        "membrane_potential": -0.0009474685810407991,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.10700000000000097,
+        "is_active": false
+      },
+      {
+        "id": 340,
+        "type": "hidden",
+        "membrane_potential": -0.002019375157226821,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -2.5099999999998355,
+        "is_active": false
+      },
+      {
+        "id": 341,
+        "type": "hidden",
+        "membrane_potential": 0.007992670415389041,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.10050000000000174,
+        "is_active": false
+      },
+      {
+        "id": 342,
+        "type": "hidden",
+        "membrane_potential": 0.00027211177513605144,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.3745000000000015,
+        "is_active": false
+      },
+      {
+        "id": 343,
+        "type": "hidden",
+        "membrane_potential": -9.036125641287822e-12,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -1.0279999999999987,
+        "is_active": false
+      },
+      {
+        "id": 344,
+        "type": "hidden",
+        "membrane_potential": 8.016951911305197e-05,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.20100000000000143,
+        "is_active": false
+      },
+      {
+        "id": 345,
+        "type": "hidden",
+        "membrane_potential": -0.005171528298943514,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -0.6590000000000014,
+        "is_active": false
+      },
+      {
+        "id": 346,
+        "type": "hidden",
+        "membrane_potential": -0.00038730994946987074,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -1.082499999999993,
+        "is_active": false
+      }
+    ],
+    "output": [
+      {
+        "id": 347,
+        "type": "output",
+        "membrane_potential": -1.2023403965256701e-08,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -40.04049999999741,
+        "is_active": true
+      },
+      {
+        "id": 348,
+        "type": "output",
+        "membrane_potential": 0.0001339975367331577,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -40.175499999997,
+        "is_active": true
+      },
+      {
+        "id": 349,
+        "type": "output",
+        "membrane_potential": -4.2687665297605864e-11,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -40.139499999997255,
+        "is_active": true
+      },
+      {
+        "id": 350,
+        "type": "output",
+        "membrane_potential": 7.074188147652164e-06,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -40.095999999997325,
+        "is_active": true
+      },
+      {
+        "id": 351,
+        "type": "output",
+        "membrane_potential": -0.00020448510176898413,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -40.06299999999717,
+        "is_active": true
+      },
+      {
+        "id": 352,
+        "type": "output",
+        "membrane_potential": 4.648987803190351e-05,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -40.125999999997035,
+        "is_active": true
+      },
+      {
+        "id": 353,
+        "type": "output",
+        "membrane_potential": 9.692507321565025e-06,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -39.974499999997434,
+        "is_active": true
+      },
+      {
+        "id": 354,
+        "type": "output",
+        "membrane_potential": 1.5687709029731344e-08,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -40.15449999999719,
+        "is_active": true
+      },
+      {
+        "id": 355,
+        "type": "output",
+        "membrane_potential": 0.002300002980711267,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -40.11399999999718,
+        "is_active": true
+      },
+      {
+        "id": 356,
+        "type": "output",
+        "membrane_potential": -0.006343812731652135,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -40.05099999999734,
+        "is_active": true
+      },
+      {
+        "id": 357,
+        "type": "output",
+        "membrane_potential": -9.647322133696665e-07,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -40.184499999997016,
+        "is_active": true
+      },
+      {
+        "id": 358,
+        "type": "output",
+        "membrane_potential": 0.00028458336079961505,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -39.983499999997235,
+        "is_active": true
+      },
+      {
+        "id": 359,
+        "type": "output",
+        "membrane_potential": -4.403912650491739e-05,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -40.15299999999706,
+        "is_active": true
+      },
+      {
+        "id": 360,
+        "type": "output",
+        "membrane_potential": -4.302828606804799e-07,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -40.040499999997444,
+        "is_active": true
+      },
+      {
+        "id": 361,
+        "type": "output",
+        "membrane_potential": -0.00575326660785093,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -40.14549999999698,
+        "is_active": true
+      },
+      {
+        "id": 362,
+        "type": "output",
+        "membrane_potential": -0.00017161864923864048,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -40.11849999999729,
+        "is_active": true
+      },
+      {
+        "id": 363,
+        "type": "output",
+        "membrane_potential": 0.0009487659951312054,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -40.1064999999972,
+        "is_active": true
+      },
+      {
+        "id": 364,
+        "type": "output",
+        "membrane_potential": -1.2610623698654405e-07,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -40.19499999999703,
+        "is_active": true
+      },
+      {
+        "id": 365,
+        "type": "output",
+        "membrane_potential": 0.0010505782529447601,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -39.95499999999767,
+        "is_active": true
+      },
+      {
+        "id": 366,
+        "type": "output",
+        "membrane_potential": 2.0305275491359742e-05,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -40.08499999999731,
+        "is_active": true
+      },
+      {
+        "id": 367,
+        "type": "output",
+        "membrane_potential": -0.009187852700835369,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -39.97149999999765,
+        "is_active": true
+      },
+      {
+        "id": 368,
+        "type": "output",
+        "membrane_potential": 0.008450150678582218,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -40.06149999999722,
+        "is_active": true
+      },
+      {
+        "id": 369,
+        "type": "output",
+        "membrane_potential": 1.844706520831937e-08,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -40.106499999997084,
+        "is_active": true
+      },
+      {
+        "id": 370,
+        "type": "output",
+        "membrane_potential": 3.112573266118561e-06,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -40.11549999999731,
+        "is_active": true
+      },
+      {
+        "id": 371,
+        "type": "output",
+        "membrane_potential": -4.362300049533895e-06,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -40.089999999997055,
+        "is_active": true
+      },
+      {
+        "id": 372,
+        "type": "output",
+        "membrane_potential": -0.013101315520708999,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -40.149999999997036,
+        "is_active": true
+      },
+      {
+        "id": 373,
+        "type": "output",
+        "membrane_potential": 0.003953994045626938,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -40.04499999999744,
+        "is_active": true
+      },
+      {
+        "id": 374,
+        "type": "output",
+        "membrane_potential": 0.014701919170887886,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -40.083999999997204,
+        "is_active": true
+      },
+      {
+        "id": 375,
+        "type": "output",
+        "membrane_potential": -7.040356243104069e-10,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -40.18449999999705,
+        "is_active": true
+      },
+      {
+        "id": 376,
+        "type": "output",
+        "membrane_potential": -0.0009657446392762662,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -40.08249999999736,
+        "is_active": true
+      },
+      {
+        "id": 377,
+        "type": "output",
+        "membrane_potential": 9.747650634883882e-07,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -40.13049999999717,
+        "is_active": true
+      },
+      {
+        "id": 378,
+        "type": "output",
+        "membrane_potential": 2.6039316639171974e-12,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -40.1154999999972,
+        "is_active": true
+      },
+      {
+        "id": 379,
+        "type": "output",
+        "membrane_potential": -0.00992854930869867,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -40.101999999997254,
+        "is_active": true
+      },
+      {
+        "id": 380,
+        "type": "output",
+        "membrane_potential": 7.979151234662804e-07,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -40.04599999999742,
+        "is_active": true
+      },
+      {
+        "id": 381,
+        "type": "output",
+        "membrane_potential": -0.00085826360205459,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -40.100499999997176,
+        "is_active": true
+      },
+      {
+        "id": 382,
+        "type": "output",
+        "membrane_potential": 0.0007438504195840055,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -40.15149999999707,
+        "is_active": true
+      },
+      {
+        "id": 383,
+        "type": "output",
+        "membrane_potential": 2.913608226623113e-05,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -40.16799999999699,
+        "is_active": true
+      },
+      {
+        "id": 384,
+        "type": "output",
+        "membrane_potential": -0.00018096490964897633,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -40.05549999999735,
+        "is_active": true
+      },
+      {
+        "id": 385,
+        "type": "output",
+        "membrane_potential": -0.00017044102837277203,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -40.08849999999712,
+        "is_active": true
+      },
+      {
+        "id": 386,
+        "type": "output",
+        "membrane_potential": 7.544019559695193e-06,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -40.16299999999704,
+        "is_active": true
+      },
+      {
+        "id": 387,
+        "type": "output",
+        "membrane_potential": 1.5705086114458024e-06,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -40.02549999999731,
+        "is_active": true
+      },
+      {
+        "id": 388,
+        "type": "output",
+        "membrane_potential": 0.002117460945026324,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -40.09749999999704,
+        "is_active": true
+      },
+      {
+        "id": 389,
+        "type": "output",
+        "membrane_potential": 3.4549878299078e-05,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -40.09749999999715,
+        "is_active": true
+      },
+      {
+        "id": 390,
+        "type": "output",
+        "membrane_potential": -2.9207784674448905e-05,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -40.05449999999747,
+        "is_active": true
+      },
+      {
+        "id": 391,
+        "type": "output",
+        "membrane_potential": -0.00014733082180618906,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -40.17699999999715,
+        "is_active": true
+      },
+      {
+        "id": 392,
+        "type": "output",
+        "membrane_potential": -0.010349782579419868,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -39.95099999999759,
+        "is_active": true
+      },
+      {
+        "id": 393,
+        "type": "output",
+        "membrane_potential": -5.965685909878439e-06,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -39.95999999999742,
+        "is_active": true
+      },
+      {
+        "id": 394,
+        "type": "output",
+        "membrane_potential": 0.0010534878217246981,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -40.15499999999706,
+        "is_active": true
+      },
+      {
+        "id": 395,
+        "type": "output",
+        "membrane_potential": 6.493053498197264e-05,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -40.09899999999717,
+        "is_active": true
+      },
+      {
+        "id": 396,
+        "type": "output",
+        "membrane_potential": -0.004383929368228472,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -40.110999999997226,
+        "is_active": true
+      },
+      {
+        "id": 397,
+        "type": "output",
+        "membrane_potential": -8.076163732312664e-06,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -39.90099999999767,
+        "is_active": true
+      },
+      {
+        "id": 398,
+        "type": "output",
+        "membrane_potential": 7.742086213008537e-05,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -40.14249999999716,
+        "is_active": true
+      },
+      {
+        "id": 399,
+        "type": "output",
+        "membrane_potential": -0.0030865332671553025,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -40.19899999999679,
+        "is_active": true
+      },
+      {
+        "id": 400,
+        "type": "output",
+        "membrane_potential": -0.0009967902960126094,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -40.115499999997034,
+        "is_active": true
+      },
+      {
+        "id": 401,
+        "type": "output",
+        "membrane_potential": 0.000812222521697281,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -39.98349999999728,
+        "is_active": true
+      },
+      {
+        "id": 402,
+        "type": "output",
+        "membrane_potential": -9.734721217470863e-05,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -40.09749999999711,
+        "is_active": true
+      },
+      {
+        "id": 403,
+        "type": "output",
+        "membrane_potential": -0.006549081472324029,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -40.19199999999704,
+        "is_active": true
+      },
+      {
+        "id": 404,
+        "type": "output",
+        "membrane_potential": 0.0030451661570832164,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -39.97299999999728,
+        "is_active": true
+      },
+      {
+        "id": 405,
+        "type": "output",
+        "membrane_potential": 0.00020833427796843222,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -40.12749999999703,
+        "is_active": true
+      },
+      {
+        "id": 406,
+        "type": "output",
+        "membrane_potential": 0.0006988183165235943,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -40.11849999999721,
+        "is_active": true
+      },
+      {
+        "id": 407,
+        "type": "output",
+        "membrane_potential": 4.756348917033153e-07,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -40.012499999997445,
+        "is_active": true
+      },
+      {
+        "id": 408,
+        "type": "output",
+        "membrane_potential": -0.006533765527970041,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -40.22199999999688,
+        "is_active": true
+      },
+      {
+        "id": 409,
+        "type": "output",
+        "membrane_potential": 0.00017635842284814378,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -40.17399999999696,
+        "is_active": true
+      },
+      {
+        "id": 410,
+        "type": "output",
+        "membrane_potential": -6.861903176291995e-08,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -40.089999999997396,
+        "is_active": true
+      },
+      {
+        "id": 411,
+        "type": "output",
+        "membrane_potential": 0.001944355301163009,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -40.112499999997056,
+        "is_active": true
+      },
+      {
+        "id": 412,
+        "type": "output",
+        "membrane_potential": -1.6658282889490705e-07,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -40.13199999999709,
+        "is_active": true
+      },
+      {
+        "id": 413,
+        "type": "output",
+        "membrane_potential": -0.0012874355031077204,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -40.08399999999721,
+        "is_active": true
+      },
+      {
+        "id": 414,
+        "type": "output",
+        "membrane_potential": 0.0013348863097332388,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -40.10199999999729,
+        "is_active": true
+      },
+      {
+        "id": 415,
+        "type": "output",
+        "membrane_potential": 0.001090369643250907,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -40.08399999999722,
+        "is_active": true
+      },
+      {
+        "id": 416,
+        "type": "output",
+        "membrane_potential": 0.008734190525039964,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -40.15149999999721,
+        "is_active": true
+      },
+      {
+        "id": 417,
+        "type": "output",
+        "membrane_potential": -0.000310088630767955,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -40.12899999999711,
+        "is_active": true
+      },
+      {
+        "id": 418,
+        "type": "output",
+        "membrane_potential": -0.007245053684415464,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -39.95049999999782,
+        "is_active": true
+      },
+      {
+        "id": 419,
+        "type": "output",
+        "membrane_potential": 0.00024263172093521253,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -40.140999999997064,
+        "is_active": true
+      },
+      {
+        "id": 420,
+        "type": "output",
+        "membrane_potential": 0.0022235869570737888,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -40.16649999999688,
+        "is_active": true
+      },
+      {
+        "id": 421,
+        "type": "output",
+        "membrane_potential": 0.00011437524491779717,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -40.18149999999697,
+        "is_active": true
+      },
+      {
+        "id": 422,
+        "type": "output",
+        "membrane_potential": -0.0006303889343604189,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -39.94049999999738,
+        "is_active": true
+      },
+      {
+        "id": 423,
+        "type": "output",
+        "membrane_potential": -0.0004100115936296964,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -40.125999999997134,
+        "is_active": true
+      },
+      {
+        "id": 424,
+        "type": "output",
+        "membrane_potential": 8.237468671013241e-05,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -40.089999999997296,
+        "is_active": true
+      },
+      {
+        "id": 425,
+        "type": "output",
+        "membrane_potential": -1.2923007260287908e-05,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -40.11849999999719,
+        "is_active": true
+      },
+      {
+        "id": 426,
+        "type": "output",
+        "membrane_potential": 0.001317617787793972,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -40.1139999999971,
+        "is_active": true
+      },
+      {
+        "id": 427,
+        "type": "output",
+        "membrane_potential": 0.00011636697617565434,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -40.17699999999712,
+        "is_active": true
+      },
+      {
+        "id": 428,
+        "type": "output",
+        "membrane_potential": -0.009568057756751186,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -40.00899999999729,
+        "is_active": true
+      },
+      {
+        "id": 429,
+        "type": "output",
+        "membrane_potential": -1.3677715349598438e-05,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -40.21749999999692,
+        "is_active": true
+      },
+      {
+        "id": 430,
+        "type": "output",
+        "membrane_potential": 0.013593168554741413,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -39.98349999999742,
+        "is_active": true
+      },
+      {
+        "id": 431,
+        "type": "output",
+        "membrane_potential": -9.366778036159108e-08,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -40.16599999999696,
+        "is_active": true
+      },
+      {
+        "id": 432,
+        "type": "output",
+        "membrane_potential": -0.00019779692676070786,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -40.11399999999712,
+        "is_active": true
+      },
+      {
+        "id": 433,
+        "type": "output",
+        "membrane_potential": -0.00016961941666691194,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -40.06749999999726,
+        "is_active": true
+      },
+      {
+        "id": 434,
+        "type": "output",
+        "membrane_potential": 0.00028723954986085206,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -40.19799999999702,
+        "is_active": true
+      },
+      {
+        "id": 435,
+        "type": "output",
+        "membrane_potential": -0.009998446409452749,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -40.0239999999973,
+        "is_active": true
+      },
+      {
+        "id": 436,
+        "type": "output",
+        "membrane_potential": 9.651279567734146e-06,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -40.21149999999689,
+        "is_active": true
+      },
+      {
+        "id": 437,
+        "type": "output",
+        "membrane_potential": -1.657586424383147e-07,
+        "trinary_state": 0,
+        "adaptation": 0.0,
+        "health": -40.166499999996866,
+        "is_active": true
+      }
+    ]
+  },
+  "synapses": [
+    {
+      "pre_id": 120,
+      "post_id": 310,
+      "w_fast": -6.85379628814115e-08,
+      "w_slow": -0.048073527072457344,
+      "w_meta": 0.21061285664081275,
+      "is_silent": false,
+      "is_modulatory": true,
+      "integrity": 1.0,
+      "synapse_type": "metabotropic"
+    },
+    {
+      "pre_id": 284,
+      "post_id": 356,
+      "w_fast": 8.801609419987967e-17,
+      "w_slow": -0.010439345012289785,
+      "w_meta": -0.13017292228586663,
+      "is_silent": false,
+      "is_modulatory": false,
+      "integrity": 1.0,
+      "synapse_type": "ionotropic_fast"
+    },
+    {
+      "pre_id": 341,
+      "post_id": 318,
+      "w_fast": -2.446171437214684e-16,
+      "w_slow": 0.009371750175997392,
+      "w_meta": -0.13085179351274964,
+      "is_silent": false,
+      "is_modulatory": false,
+      "integrity": 0.96,
+      "synapse_type": "ionotropic_fast"
+    },
+    {
+      "pre_id": 326,
+      "post_id": 189,
+      "w_fast": 1.0695521980959925e-13,
+      "w_slow": 0.022827101357844867,
+      "w_meta": -0.22238743648946813,
+      "is_silent": false,
+      "is_modulatory": false,
+      "integrity": 1.0,
+      "synapse_type": "ionotropic_fast"
+    },
+    {
+      "pre_id": 219,
+      "post_id": 414,
+      "w_fast": -4.849237082368303e-24,
+      "w_slow": 0.0031829311102601976,
+      "w_meta": 0.14069241441176225,
+      "is_silent": false,
+      "is_modulatory": true,
+      "integrity": 0.4299999999999995,
+      "synapse_type": "metabotropic"
+    },
+    {
+      "pre_id": 291,
+      "post_id": 360,
+      "w_fast": 2.0843772099820793e-15,
+      "w_slow": -0.0021807044170216662,
+      "w_meta": 0.21820261181148065,
+      "is_silent": false,
+      "is_modulatory": false,
+      "integrity": 0.23999999999999932,
+      "synapse_type": "ionotropic_fast"
+    },
+    {
+      "pre_id": 315,
+      "post_id": 176,
+      "w_fast": -1.699217935745565e-07,
+      "w_slow": -0.09042126599018131,
+      "w_meta": 0.03882812938453269,
+      "is_silent": false,
+      "is_modulatory": false,
+      "integrity": 1.0,
+      "synapse_type": "ionotropic_fast"
+    },
+    {
+      "pre_id": 158,
+      "post_id": 418,
+      "w_fast": -1.1434358560756484e-13,
+      "w_slow": 0.038960402931156504,
+      "w_meta": 0.2335811184067156,
+      "is_silent": false,
+      "is_modulatory": true,
+      "integrity": 1.0,
+      "synapse_type": "metabotropic"
+    },
+    {
+      "pre_id": 354,
+      "post_id": 237,
+      "w_fast": 1.726691938154647e-24,
+      "w_slow": 0.0031976612072036866,
+      "w_meta": 0.01718265754035009,
+      "is_silent": false,
+      "is_modulatory": false,
+      "integrity": 0.4299999999999995,
+      "synapse_type": "ionotropic_fast"
+    },
+    {
+      "pre_id": 85,
+      "post_id": 302,
+      "w_fast": -0.026419797738738447,
+      "w_slow": -0.1731916669608955,
+      "w_meta": -0.12583893664617612,
+      "is_silent": false,
+      "is_modulatory": false,
+      "integrity": 1.0,
+      "synapse_type": "ionotropic_slow"
+    },
+    {
+      "pre_id": 233,
+      "post_id": 185,
+      "w_fast": 1.8411254717698951e-09,
+      "w_slow": -0.022427089426142174,
+      "w_meta": 0.05872602676990782,
+      "is_silent": true,
+      "is_modulatory": false,
+      "integrity": 1.0,
+      "synapse_type": "silent"
+    },
+    {
+      "pre_id": 423,
+      "post_id": 226,
+      "w_fast": 3.5904918252639035e-09,
+      "w_slow": -0.0019336829568224083,
+      "w_meta": 0.025474691377809174,
+      "is_silent": false,
+      "is_modulatory": false,
+      "integrity": 0.3299999999999994,
+      "synapse_type": "ionotropic_fast"
+    },
+    {
+      "pre_id": 18,
+      "post_id": 192,
+      "w_fast": -0.17745643122770657,
+      "w_slow": 0.024651423361153453,
+      "w_meta": 0.2878959802487522,
+      "is_silent": false,
+      "is_modulatory": false,
+      "integrity": 1.0,
+      "synapse_type": "ionotropic_fast"
+    },
+    {
+      "pre_id": 390,
+      "post_id": 337,
+      "w_fast": -1.3890364831621506e-11,
+      "w_slow": 0.04524734410556454,
+      "w_meta": -0.26624165045062836,
+      "is_silent": false,
+      "is_modulatory": false,
+      "integrity": 1.0,
+      "synapse_type": "ionotropic_fast"
+    },
+    {
+      "pre_id": 419,
+      "post_id": 271,
+      "w_fast": -3.184387251538784e-08,
+      "w_slow": -0.017890701032475125,
+      "w_meta": -0.18838529841519228,
+      "is_silent": false,
+      "is_modulatory": false,
+      "integrity": 1.0,
+      "synapse_type": "ionotropic_fast"
+    },
+    {
+      "pre_id": 65,
+      "post_id": 300,
+      "w_fast": -1.0010975234877847e-08,
+      "w_slow": 0.10467124520024902,
+      "w_meta": -0.1118681478160191,
+      "is_silent": false,
+      "is_modulatory": true,
+      "integrity": 1.0,
+      "synapse_type": "metabotropic"
+    },
+    {
+      "pre_id": 427,
+      "post_id": 346,
+      "w_fast": -6.133123149572415e-10,
+      "w_slow": -0.012257230892669316,
+      "w_meta": -0.029527734776409627,
+      "is_silent": true,
+      "is_modulatory": false,
+      "integrity": 1.0,
+      "synapse_type": "silent"
+    },
+    {
+      "pre_id": 399,
+      "post_id": 117,
+      "w_fast": 4.358549400882399e-07,
+      "w_slow": 0.04015985650541276,
+      "w_meta": -0.022874322447778216,
+      "is_silent": false,
+      "is_modulatory": false,
+      "integrity": 1.0,
+      "synapse_type": "ionotropic_fast"
+    },
+    {
+      "pre_id": 37,
+      "post_id": 335,
+      "w_fast": -3.736017964835078e-19,
+      "w_slow": 0.008859793966776611,
+      "w_meta": -0.016638438343639414,
+      "is_silent": false,
+      "is_modulatory": false,
+      "integrity": 0.94,
+      "synapse_type": "ionotropic_slow"
+    },
+    {
+      "pre_id": 412,
+      "post_id": 206,
+      "w_fast": 9.62126080360565e-06,
+      "w_slow": 0.13616855579065246,
+      "w_meta": 0.20333099718805692,
+      "is_silent": false,
+      "is_modulatory": false,
+      "integrity": 1.0,
+      "synapse_type": "ionotropic_slow"
+    },
+    {
+      "pre_id": 409,
+      "post_id": 174,
+      "w_fast": 1.804165936063724e-18,
+      "w_slow": -0.006332300447349341,
+      "w_meta": 0.21100502678188018,
+      "is_silent": false,
+      "is_modulatory": false,
+      "integrity": 0.7699999999999998,
+      "synapse_type": "ionotropic_fast"
+    },
+    {
+      "pre_id": 7,
+      "post_id": 319,
+      "w_fast": 0.0047059355901569655,
+      "w_slow": -0.11449029249923827,
+      "w_meta": -0.1288728213297054,
+      "is_silent": false,
+      "is_modulatory": true,
+      "integrity": 1.0,
+      "synapse_type": "metabotropic"
+    },
+    {
+      "pre_id": 287,
+      "post_id": 254,
+      "w_fast": -2.08819786346472e-16,
+      "w_slow": 0.0232898255991242,
+      "w_meta": 0.06761722383024069,
+      "is_silent": false,
+      "is_modulatory": false,
+      "integrity": 1.0,
+      "synapse_type": "ionotropic_slow"
+    },
+    {
+      "pre_id": 110,
+      "post_id": 47,
+      "w_fast": 0.001243732680828904,
+      "w_slow": 0.08589777853396341,
+      "w_meta": 0.20830226382682324,
+      "is_silent": false,
+      "is_modulatory": false,
+      "integrity": 1.0,
+      "synapse_type": "ionotropic_fast"
+    },
+    {
+      "pre_id": 285,
+      "post_id": 45,
+      "w_fast": -0.009734788814741121,
+      "w_slow": 0.01035693278819985,
+      "w_meta": 0.2626975470184059,
+      "is_silent": false,
+      "is_modulatory": false,
+      "integrity": 1.0,
+      "synapse_type": "ionotropic_fast"
+    },
+    {
+      "pre_id": 221,
+      "post_id": 58,
+      "w_fast": -2.0089284654994018e-08,
+      "w_slow": -0.09652441312559759,
+      "w_meta": 0.1670570731750781,
+      "is_silent": false,
+      "is_modulatory": false,
+      "integrity": 1.0,
+      "synapse_type": "ionotropic_fast"
+    },
+    {
+      "pre_id": 263,
+      "post_id": 18,
+      "w_fast": 6.835290604293324e-07,
+      "w_slow": -0.09486409417500757,
+      "w_meta": -0.174081330884778,
+      "is_silent": false,
+      "is_modulatory": false,
+      "integrity": 1.0,
+      "synapse_type": "ionotropic_fast"
+    },
+    {
+      "pre_id": 355,
+      "post_id": 424,
+      "w_fast": 1.540722841483255e-17,
+      "w_slow": -0.00368752384836931,
+      "w_meta": -0.22435347050378168,
+      "is_silent": false,
+      "is_modulatory": true,
+      "integrity": 0.49999999999999956,
+      "synapse_type": "metabotropic"
+    },
+    {
+      "pre_id": 90,
+      "post_id": 47,
+      "w_fast": -8.407284224057726e-16,
+      "w_slow": -0.0028665556493096024,
+      "w_meta": -0.15381200089683925,
+      "is_silent": false,
+      "is_modulatory": false,
+      "integrity": 0.37999999999999945,
+      "synapse_type": "ionotropic_fast"
+    },
+    {
+      "pre_id": 16,
+      "post_id": 80,
+      "w_fast": -2.2645383260510342e-10,
+      "w_slow": -0.0315424831669104,
+      "w_meta": 0.24304751167044591,
+      "is_silent": false,
+      "is_modulatory": true,
+      "integrity": 1.0,
+      "synapse_type": "metabotropic"
+    },
+    {
+      "pre_id": 407,
+      "post_id": 401,
+      "w_fast": 5.914996368550083e-07,
+      "w_slow": 0.0017285005531312435,
+      "w_meta": 0.17529306168706935,
+      "is_silent": false,
+      "is_modulatory": false,
+      "integrity": 0.5599999999999996,
+      "synapse_type": "ionotropic_fast"
+    },
+    {
+      "pre_id": 50,
+      "post_id": 68,
+      "w_fast": 6.578801365885764e-07,
+      "w_slow": -0.012629265321933673,
+      "w_meta": 0.06557521880178503,
+      "is_silent": true,
+      "is_modulatory": false,
+      "integrity": 1.0,
+      "synapse_type": "silent"
+    },
+    {
+      "pre_id": 63,
+      "post_id": 387,
+      "w_fast": 0.01105847907008299,
+      "w_slow": 0.31688125645275034,
+      "w_meta": -0.0910316864037898,
+      "is_silent": true,
+      "is_modulatory": true,
+      "integrity": 1.0,
+      "synapse_type": "silent"
+    }
+  ],
+  "neuromodulators": {
+    "dopamine": 0.1,
+    "serotonin": 0.1,
+    "acetylcholine": 0.1,
+    "norepinephrine": 0.1
+  },
+  "time": 41624.0,
+  "step_count": 41624
+}
