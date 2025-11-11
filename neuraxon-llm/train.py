@@ -1,9 +1,8 @@
 import torch
 from datasets import load_dataset
 from tqdm import tqdm
-from language_model import LanguageModel, NetworkParameters
+from neuraxon import LanguageModel, NetworkParameters, save_network
 from tokenizer import Tokenizer
-from neuraxon import save_network
 
 def train(model: LanguageModel, dataset, epochs: int = 1, save_path: str = "neuraxon_lm.json"):
     """
