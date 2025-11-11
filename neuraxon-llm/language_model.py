@@ -95,9 +95,10 @@ class LanguageModel(NeuraxonNetwork):
         print(f"Language model loaded from {filepath}")
         return model
 
-    def process_text(self, text: str):
+    def process_text(self, text: str, duration_per_char: int = 5):
         """
-        Processes a string of text, feeding it into the network one character at a time.
+        Processes a string of text, feeding it into the network one character at a time
+        with continuous time processing.
         """
         encoded_text = self.tokenizer.encode(text)
 
@@ -108,8 +109,9 @@ class LanguageModel(NeuraxonNetwork):
             # Set the input neuron states
             self.set_input_states(input_vector)
 
-            # Simulate one step
-            self.simulate_step()
+            # Simulate for a duration to allow the network to process the character
+            for _ in range(duration_per_char):
+                self.simulate_step()
 
     def predict_next_char(self, input_text: str) -> str:
         """
