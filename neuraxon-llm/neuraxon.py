@@ -17,9 +17,12 @@ import json
 import random
 import math
 import networkx as nx
+import numpy as np
 from typing import List, Dict, Tuple, Optional
 from dataclasses import dataclass, asdict
 from enum import Enum
+from tokenizer import Tokenizer
+from neuraxon_cython import update_neurons_cython, update_synapses_cython
 
 
 # =============================================================================
@@ -103,285 +106,6 @@ class TrinaryState(Enum):
 
 
 # =============================================================================
-# SYNAPSE CLASS
-# =============================================================================
-
-class Synapse:
-    """
-    Bio-inspired synapse with multiple weight types and dynamics
-    """
-
-    def __init__(self, pre_id: int, post_id: int, params: NetworkParameters):
-        self.pre_id = pre_id
-        self.post_id = post_id
-        self.params = params
-
-        # Triple weight system
-        self.w_fast = random.uniform(params.w_fast_init_min, params.w_fast_init_max)
-        self.w_slow = random.uniform(params.w_slow_init_min, params.w_slow_init_max)
-        self.w_meta = random.uniform(params.w_meta_init_min, params.w_meta_init_max)
-
-        # Synapse properties
-        self.is_silent = random.random() < 0.1  # 10% silent synapses
-        self.is_modulatory = random.random() < 0.2  # 20% modulatory
-        self.integrity = 1.0  # Health of the synapse
-
-        # Traces for STDP
-        self.pre_trace = 0.0
-        self.post_trace = 0.0
-
-        # Determine primary type
-        self.synapse_type = self._determine_type()
-
-    def _determine_type(self) -> SynapseType:
-        """Determine the primary synapse type"""
-        if self.is_silent:
-            return SynapseType.SILENT
-        elif self.is_modulatory:
-            return SynapseType.METABOTROPIC
-        elif abs(self.w_fast) > abs(self.w_slow):
-            return SynapseType.IONOTROPIC_FAST
-        else:
-            return SynapseType.IONOTROPIC_SLOW
-
-    def compute_input(self, pre_state: int) -> float:
-        """
-        Compute synaptic input based on presynaptic state
-
-        Args:
-            pre_state: Trinary state of presynaptic neuron (-1, 0, 1)
-
-        Returns:
-            Synaptic current contribution
-        """
-        if self.is_silent:
-            return 0.0
-
-        # Combined ionotropic contribution
-        return (self.w_fast + self.w_slow) * pre_state
-
-    def update(self, pre_state: int, post_state: int,
-               neuromodulators: Dict[str, float], dt: float):
-        """
-        Update synaptic weights based on activity and neuromodulation
-
-        Args:
-            pre_state: Presynaptic neuron state
-            post_state: Postsynaptic neuron state
-            neuromodulators: Dict of neuromodulator concentrations
-            dt: Time step
-        """
-        # Update traces
-        tau_trace = self.params.stdp_window
-        self.pre_trace += (-self.pre_trace / tau_trace + (1 if pre_state == 1 else 0)) * dt
-        self.post_trace += (-self.post_trace / tau_trace + (1 if post_state == 1 else 0)) * dt
-
-        # More sophisticated STDP-like plasticity
-        dopamine = neuromodulators.get('dopamine', 0.5)
-        serotonin = neuromodulators.get('serotonin', 0.5)
-        acetylcholine = neuromodulators.get('acetylcholine', 0.5)
-
-        # Hebbian learning with neuromodulator influence
-        if pre_state == 1 and post_state == 1:
-            # LTP: strengthened by dopamine
-            delta_w = self.params.learning_rate * (0.5 + dopamine) * self.post_trace
-        elif pre_state == 1 and post_state == -1:
-            # LTD: also influenced by dopamine
-            delta_w = -self.params.learning_rate * (0.5 + dopamine) * self.post_trace
-        elif pre_state == -1 and post_state == 1:
-            # Anti-Hebbian plasticity
-            delta_w = -self.params.learning_rate * 0.1 * self.post_trace
-        else:
-            delta_w = 0.0
-
-        # Synaptic scaling based on acetylcholine (attention)
-        scaling_factor = 1.0 + (acetylcholine - 0.5) * 0.2
-
-        # Update fast weight (ionotropic)
-        self.w_fast += dt / self.params.tau_fast * (-self.w_fast + delta_w * 0.7 * scaling_factor)
-        self.w_fast = max(-1.0, min(1.0, self.w_fast))
-
-        # Update slow weight (NMDA-like)
-        self.w_slow += dt / self.params.tau_slow * (-self.w_slow + delta_w * 0.3 * scaling_factor)
-        self.w_slow = max(-1.0, min(1.0, self.w_slow))
-
-        # Update metabotropic weight (very slow, modulated by serotonin)
-        self.w_meta += dt / self.params.tau_meta * (
-            -self.w_meta + delta_w * 0.1 * (0.5 + serotonin)
-        )
-        self.w_meta = max(-0.5, min(0.5, self.w_meta))
-
-        # Update integrity
-        if abs(self.w_fast) < 0.01 and abs(self.w_slow) < 0.01:
-            self.integrity -= self.params.synapse_death_prob * dt
-        else:
-            self.integrity = min(1.0, self.integrity + 0.0001 * dt)
-
-        # Unsilence silent synapses with LTP
-        if self.is_silent and pre_state == 1 and post_state == 1:
-            if random.random() < 0.01 * (0.5 + dopamine):  # Dopamine promotes unsilencing
-                self.is_silent = False
-                self.synapse_type = self._determine_type()
-
-    def get_modulatory_effect(self) -> float:
-        """Get the modulatory effect on postsynaptic neuron"""
-        if self.is_modulatory:
-            return self.w_meta
-        return 0.0
-
-    def to_dict(self) -> dict:
-        """Convert synapse to dictionary for JSON serialization"""
-        return {
-            'pre_id': self.pre_id,
-            'post_id': self.post_id,
-            'w_fast': self.w_fast,
-            'w_slow': self.w_slow,
-            'w_meta': self.w_meta,
-            'is_silent': self.is_silent,
-            'is_modulatory': self.is_modulatory,
-            'integrity': self.integrity,
-            'synapse_type': self.synapse_type.value
-        }
-
-
-# =============================================================================
-# NEURON (NEURAXON) CLASS
-# =============================================================================
-
-class Neuraxon:
-    """
-    Bio-inspired neuron with trinary states and complex dynamics
-    """
-
-    def __init__(self, neuron_id: int, neuron_type: NeuronType,
-                 params: NetworkParameters):
-        self.id = neuron_id
-        self.type = neuron_type
-        self.params = params
-
-        # State variables
-        self.membrane_potential = 0.0
-        self.trinary_state = TrinaryState.NEUTRAL.value
-        self.adaptation = 0.0
-        self.autoreceptor = 0.0 # Autoreceptor for self-modulation
-
-        # Health and activity
-        self.health = 1.0
-        self.is_active = True
-
-        # History for visualization
-        self.state_history = []
-        self.potential_history = []
-
-    def update(self, synaptic_inputs: List[float],
-               modulatory_inputs: List[float],
-               external_input: float,
-               neuromodulators: Dict[str, float],
-               dt: float):
-        """
-        Update neuron state based on inputs and internal dynamics
-
-        Args:
-            synaptic_inputs: List of synaptic current contributions
-            modulatory_inputs: List of modulatory effects
-            external_input: External drive (for input neurons)
-            neuromodulators: Global neuromodulator levels
-            dt: Time step
-        """
-        if not self.is_active:
-            return
-
-        # Sum all inputs
-        total_synaptic = sum(synaptic_inputs)
-        total_modulatory = sum(modulatory_inputs)
-
-        # Neuromodulator levels
-        acetylcholine = neuromodulators.get('acetylcholine', 0.5)
-        norepinephrine = neuromodulators.get('norepinephrine', 0.5)
-
-        # Spontaneous activity influenced by norepinephrine (arousal)
-        spontaneous = 0.0
-        if random.random() < self.params.spontaneous_firing_rate * (1 + norepinephrine) * dt:
-            spontaneous = random.uniform(-0.5, 0.5) * (1 + norepinephrine)
-
-        # Membrane potential dynamics
-        tau = self.params.membrane_time_constant
-        self.membrane_potential += dt / tau * (
-            -self.membrane_potential
-            + total_synaptic
-            + external_input
-            - self.adaptation
-            + spontaneous
-            - self.autoreceptor # Autoreceptor feedback
-        )
-
-        # Adaptation (frequency adaptation)
-        tau_adapt = 100.0  # ms
-        self.adaptation += dt / tau_adapt * (
-            -self.adaptation + 0.1 * abs(self.trinary_state)
-        )
-
-        # Autoreceptor (self-inhibition/modulation)
-        tau_auto = 200.0  # ms
-        self.autoreceptor += dt / tau_auto * (
-            -self.autoreceptor + 0.2 * self.trinary_state
-        )
-
-        # Effective thresholds (modulated by neuromodulators and autoreceptor)
-
-        # Acetylcholine increases excitability (lower threshold), Norepinephrine increases alertness (higher threshold)
-        threshold_mod = (acetylcholine - 0.5) * 0.5 - (norepinephrine - 0.5) * 0.2 + total_modulatory * 0.3
-
-        theta_exc = self.params.firing_threshold_excitatory - threshold_mod - 0.1 * self.autoreceptor
-        theta_inh = self.params.firing_threshold_inhibitory - threshold_mod + 0.1 * self.autoreceptor
-
-        # Determine trinary state
-        if self.membrane_potential > theta_exc:
-            self.trinary_state = TrinaryState.EXCITATORY.value
-        elif self.membrane_potential < theta_inh:
-            self.trinary_state = TrinaryState.INHIBITORY.value
-        else:
-            self.trinary_state = TrinaryState.NEUTRAL.value
-
-        # Update health
-        activity_level = abs(self.membrane_potential) / 2.0
-        if activity_level < 0.01:
-            self.health -= self.params.neuron_health_decay * dt
-        else:
-            self.health = min(1.0, self.health + 0.0005 * dt)
-
-        # Check if neuron should die (only for hidden neurons)
-        if self.type == NeuronType.HIDDEN and self.health < self.params.neuron_death_threshold:
-            if random.random() < 0.001:  # Very rare
-                self.is_active = False
-
-        # Store history
-        self.state_history.append(self.trinary_state)
-        self.potential_history.append(self.membrane_potential)
-        if len(self.state_history) > 1000:
-            self.state_history.pop(0)
-            self.potential_history.pop(0)
-
-    def set_state(self, state: int):
-        """Manually set neuron state (for input neurons)"""
-        if state in [-1, 0, 1]:
-            self.trinary_state = state
-            self.membrane_potential = state * self.params.firing_threshold_excitatory
-
-    def to_dict(self) -> dict:
-        """Convert neuron to dictionary for JSON serialization"""
-        return {
-            'id': self.id,
-            'type': self.type.value,
-            'membrane_potential': self.membrane_potential,
-            'trinary_state': self.trinary_state,
-            'adaptation': self.adaptation,
-            'health': self.health,
-            'is_active': self.is_active
-        }
-
-
-# =============================================================================
 # NEURAXON NETWORK CLASS
 # =============================================================================
 
@@ -393,22 +117,20 @@ class NeuraxonNetwork:
     def __init__(self, params: Optional[NetworkParameters] = None):
         self.params = params or NetworkParameters()
 
-        # Neurons
-        self.input_neurons: List[Neuraxon] = []
-        self.hidden_neurons: List[Neuraxon] = []
-        self.output_neurons: List[Neuraxon] = []
-        self.all_neurons: List[Neuraxon] = []
-
-        # Synapses
-        self.synapses: List[Synapse] = []
+        # Data structures for Numba
+        self.neurons = None
+        self.synapses = None
+        self.input_neuron_indices = None
+        self.hidden_neuron_indices = None
+        self.output_neuron_indices = None
 
         # Neuromodulators (global state)
-        self.neuromodulators = {
-            'dopamine': self.params.dopamine_baseline,
-            'serotonin': self.params.serotonin_baseline,
-            'acetylcholine': self.params.acetylcholine_baseline,
-            'norepinephrine': self.params.norepinephrine_baseline
-        }
+        self.neuromodulators = np.array([
+            self.params.dopamine_baseline,
+            self.params.serotonin_baseline,
+            self.params.acetylcholine_baseline,
+            self.params.norepinephrine_baseline
+        ], dtype=np.float32)
 
         # Simulation state
         self.time = 0.0
@@ -420,56 +142,48 @@ class NeuraxonNetwork:
 
     def _initialize_neurons(self):
         """Create neurons with ring architecture"""
-        neuron_id = 0
+        num_neurons = self.params.num_input_neurons + self.params.num_hidden_neurons + self.params.num_output_neurons
+        # neuron state: [trinary_state, membrane_potential, adaptation, autoreceptor, health, type, is_hidden, is_active]
+        self.neurons = np.zeros((num_neurons, 8), dtype=np.float32)
 
-        # Input neurons
-        for _ in range(self.params.num_input_neurons):
-            neuron = Neuraxon(neuron_id, NeuronType.INPUT, self.params)
-            self.input_neurons.append(neuron)
-            self.all_neurons.append(neuron)
-            neuron_id += 1
+        self.input_neuron_indices = np.arange(self.params.num_input_neurons)
+        self.hidden_neuron_indices = np.arange(self.params.num_input_neurons, self.params.num_input_neurons + self.params.num_hidden_neurons)
+        self.output_neuron_indices = np.arange(self.params.num_input_neurons + self.params.num_hidden_neurons, num_neurons)
 
-        # Hidden neurons
-        for _ in range(self.params.num_hidden_neurons):
-            neuron = Neuraxon(neuron_id, NeuronType.HIDDEN, self.params)
-            self.hidden_neurons.append(neuron)
-            self.all_neurons.append(neuron)
-            neuron_id += 1
+        self.neurons[self.input_neuron_indices, 5] = 0 # NeuronType.INPUT
+        self.neurons[self.hidden_neuron_indices, 5] = 1 # NeuronType.HIDDEN
+        self.neurons[self.output_neuron_indices, 5] = 2 # NeuronType.OUTPUT
 
-        # Output neurons
-        for _ in range(self.params.num_output_neurons):
-            neuron = Neuraxon(neuron_id, NeuronType.OUTPUT, self.params)
-            self.output_neurons.append(neuron)
-            self.all_neurons.append(neuron)
-            neuron_id += 1
+        self.neurons[self.hidden_neuron_indices, 6] = 1 # is_hidden
+        self.neurons[:, 7] = 1 # is_active
+        self.neurons[:, 4] = 1.0 # health
 
     def _initialize_synapses(self):
         """
         Create synapses using the Watts-Strogatz small-world model.
         """
-        num_neurons = len(self.all_neurons)
-        # k must be even and greater than log(n)
+        num_neurons = len(self.neurons)
         k = max(4, int(2 * math.log(num_neurons)))
         if k % 2 != 0:
             k += 1
 
-        # p is the rewiring probability
         p = self.params.connection_probability
 
-        # Create a small-world graph
         graph = nx.watts_strogatz_graph(num_neurons, k, p)
 
-        for pre_id, post_id in graph.edges():
-            pre_neuron = self.all_neurons[pre_id]
-            post_neuron = self.all_neurons[post_id]
+        num_synapses = len(graph.edges())
+        # synapse state: [pre_id, post_id, w_fast, w_slow, w_meta, is_silent, is_modulatory, integrity, pre_trace, post_trace]
+        self.synapses = np.zeros((num_synapses, 10), dtype=np.float32)
 
-            # Constraint: Output cannot connect to Input
-            if (pre_neuron.type == NeuronType.OUTPUT and
-                post_neuron.type == NeuronType.INPUT):
-                continue
-
-            synapse = Synapse(pre_id, post_id, self.params)
-            self.synapses.append(synapse)
+        for i, (pre_id, post_id) in enumerate(graph.edges()):
+            self.synapses[i, 0] = pre_id
+            self.synapses[i, 1] = post_id
+            self.synapses[i, 2] = random.uniform(self.params.w_fast_init_min, self.params.w_fast_init_max)
+            self.synapses[i, 3] = random.uniform(self.params.w_slow_init_min, self.params.w_slow_init_max)
+            self.synapses[i, 4] = random.uniform(self.params.w_meta_init_min, self.params.w_meta_init_max)
+            self.synapses[i, 5] = 1 if random.random() < 0.1 else 0
+            self.synapses[i, 6] = 1 if random.random() < 0.2 else 0
+            self.synapses[i, 7] = 1.0
 
     def simulate_step(self, external_inputs: Optional[Dict[int, float]] = None):
         """
@@ -478,68 +192,55 @@ class NeuraxonNetwork:
         Args:
             external_inputs: Dict mapping neuron IDs to external input values
         """
-        external_inputs = external_inputs or {}
+        external_inputs_array = np.zeros(len(self.neurons), dtype=np.float32)
+        if external_inputs:
+            for i, val in external_inputs.items():
+                external_inputs_array[i] = val
 
-        # Collect inputs for each neuron
-        neuron_synaptic_inputs = {n.id: [] for n in self.all_neurons}
-        neuron_modulatory_inputs = {n.id: [] for n in self.all_neurons}
+        synaptic_inputs = np.zeros(len(self.neurons), dtype=np.float32)
+        modulatory_inputs = np.zeros(len(self.neurons), dtype=np.float32)
 
-        # Process synapses
-        for synapse in self.synapses:
-            if synapse.integrity <= 0:
-                continue
+        for i in range(len(self.synapses)):
+            pre_id = int(self.synapses[i, 0])
+            post_id = int(self.synapses[i, 1])
+            if self.neurons[pre_id, 7]: # is_active
+                syn_input = (self.synapses[i, 2] + self.synapses[i, 3]) * self.neurons[pre_id, 0]
+                if not self.synapses[i, 5]: # is_silent
+                    synaptic_inputs[post_id] += syn_input
+                if self.synapses[i, 6]: # is_modulatory
+                    modulatory_inputs[post_id] += self.synapses[i, 4]
 
-            pre_neuron = self.all_neurons[synapse.pre_id]
-            if not pre_neuron.is_active:
-                continue
+        params_array = np.array(list(asdict(self.params).values()), dtype=np.float32)
 
-            # Compute synaptic input
-            syn_input = synapse.compute_input(pre_neuron.trinary_state)
-            neuron_synaptic_inputs[synapse.post_id].append(syn_input)
+        update_neurons_cython(
+            self.neurons,
+            synaptic_inputs,
+            modulatory_inputs,
+            external_inputs_array,
+            self.neuromodulators,
+            params_array,
+            self.params.dt
+        )
 
-            # Add modulatory effect
-            mod_effect = synapse.get_modulatory_effect()
-            if mod_effect != 0:
-                neuron_modulatory_inputs[synapse.post_id].append(mod_effect)
-
-        # Update neurons
-        for neuron in self.all_neurons:
-            if not neuron.is_active:
-                continue
-
-            external_input = external_inputs.get(neuron.id, 0.0)
-
-            neuron.update(
-                synaptic_inputs=neuron_synaptic_inputs[neuron.id],
-                modulatory_inputs=neuron_modulatory_inputs[neuron.id],
-                external_input=external_input,
-                neuromodulators=self.neuromodulators,
-                dt=self.params.dt
-            )
-
-        # Update synapses
-        for synapse in self.synapses:
-            if synapse.integrity <= 0:
-                continue
-
-            pre_neuron = self.all_neurons[synapse.pre_id]
-            post_neuron = self.all_neurons[synapse.post_id]
-
-            if pre_neuron.is_active and post_neuron.is_active:
-                synapse.update(
-                    pre_state=pre_neuron.trinary_state,
-                    post_state=post_neuron.trinary_state,
-                    neuromodulators=self.neuromodulators,
-                    dt=self.params.dt
-                )
+        update_synapses_cython(
+            self.synapses,
+            self.neurons,
+            self.neuromodulators,
+            params_array,
+            self.params.dt
+        )
 
         # Update neuromodulators (decay)
-        for key in self.neuromodulators:
-            baseline = getattr(self.params, f'{key}_baseline')
-            self.neuromodulators[key] += (
-                (baseline - self.neuromodulators[key]) *
-                self.params.neuromod_decay_rate * self.params.dt / 100.0
-            )
+        baselines = np.array([
+            self.params.dopamine_baseline,
+            self.params.serotonin_baseline,
+            self.params.acetylcholine_baseline,
+            self.params.norepinephrine_baseline
+        ], dtype=np.float32)
+        self.neuromodulators += (
+            (baselines - self.neuromodulators) *
+            self.params.neuromod_decay_rate * self.params.dt / 100.0
+        )
 
         # Structural plasticity
         self._apply_structural_plasticity()
@@ -551,27 +252,34 @@ class NeuraxonNetwork:
     def _apply_structural_plasticity(self):
         """Apply synapse formation and death based on more nuanced conditions."""
         # Synapse pruning based on integrity
-        self.synapses = [s for s in self.synapses if s.integrity > self.params.synapse_integrity_threshold]
+        self.synapses = self.synapses[self.synapses[:, 7] > self.params.synapse_integrity_threshold]
 
         # Neuron death for unhealthy hidden neurons
-        for neuron in self.hidden_neurons:
-            if neuron.health < self.params.neuron_death_threshold and random.random() < 0.01:
-                neuron.is_active = False
-                # Remove connected synapses
-                self.synapses = [s for s in self.synapses if s.pre_id != neuron.id and s.post_id != neuron.id]
+        for i in self.hidden_neuron_indices:
+            if self.neurons[i, 4] < self.params.neuron_death_threshold and random.random() < 0.01:
+                self.neurons[i, 7] = 0
+                self.synapses = self.synapses[(self.synapses[:, 0] != i) & (self.synapses[:, 1] != i)]
 
         # Synapse formation between healthy and active neurons
         if random.random() < self.params.synapse_formation_prob:
-            healthy_neurons = [n for n in self.all_neurons if n.is_active and n.health > 0.5]
+            healthy_neurons = np.where((self.neurons[:, 7] == 1) & (self.neurons[:, 4] > 0.5))[0]
             if len(healthy_neurons) >= 2:
                 pre = random.choice(healthy_neurons)
                 post = random.choice(healthy_neurons)
 
-                if pre.id != post.id and not (pre.type == NeuronType.OUTPUT and post.type == NeuronType.INPUT):
-                    exists = any(s.pre_id == pre.id and s.post_id == post.id for s in self.synapses)
+                if pre != post and not (self.neurons[pre, 5] == 2 and self.neurons[post, 5] == 0):
+                    exists = np.any((self.synapses[:, 0] == pre) & (self.synapses[:, 1] == post))
                     if not exists:
-                        new_synapse = Synapse(pre.id, post.id, self.params)
-                        self.synapses.append(new_synapse)
+                        new_synapse = np.zeros((1, 10), dtype=np.float32)
+                        new_synapse[0, 0] = pre
+                        new_synapse[0, 1] = post
+                        new_synapse[0, 2] = random.uniform(self.params.w_fast_init_min, self.params.w_fast_init_max)
+                        new_synapse[0, 3] = random.uniform(self.params.w_slow_init_min, self.params.w_slow_init_max)
+                        new_synapse[0, 4] = random.uniform(self.params.w_meta_init_min, self.params.w_meta_init_max)
+                        new_synapse[0, 5] = 1 if random.random() < 0.1 else 0
+                        new_synapse[0, 6] = 1 if random.random() < 0.2 else 0
+                        new_synapse[0, 7] = 1.0
+                        self.synapses = np.vstack([self.synapses, new_synapse])
 
     def set_input_states(self, states: List[int]):
         """
@@ -580,12 +288,13 @@ class NeuraxonNetwork:
         Args:
             states: List of trinary states (-1, 0, 1)
         """
-        for i, state in enumerate(states[:len(self.input_neurons)]):
-            self.input_neurons[i].set_state(state)
+        for i, state in enumerate(states[:len(self.input_neuron_indices)]):
+            self.neurons[self.input_neuron_indices[i], 0] = state
+            self.neurons[self.input_neuron_indices[i], 1] = state * self.params.firing_threshold_excitatory
 
     def get_output_states(self) -> List[int]:
         """Get current states of output neurons"""
-        return [n.trinary_state for n in self.output_neurons if n.is_active]
+        return self.neurons[self.output_neuron_indices, 0][self.neurons[self.output_neuron_indices, 7] == 1].tolist()
 
     def modulate(self, neuromodulator: str, level: float):
         """
@@ -595,20 +304,22 @@ class NeuraxonNetwork:
             neuromodulator: Name of neuromodulator
             level: New level (0.0 to 1.0)
         """
-        if neuromodulator in self.neuromodulators:
-            self.neuromodulators[neuromodulator] = max(0.0, min(1.0, level))
+        if neuromodulator == 'dopamine':
+            self.neuromodulators[0] = max(0.0, min(1.0, level))
+        elif neuromodulator == 'serotonin':
+            self.neuromodulators[1] = max(0.0, min(1.0, level))
+        elif neuromodulator == 'acetylcholine':
+            self.neuromodulators[2] = max(0.0, min(1.0, level))
+        elif neuromodulator == 'norepinephrine':
+            self.neuromodulators[3] = max(0.0, min(1.0, level))
 
     def to_dict(self) -> dict:
         """Convert network to dictionary for JSON serialization"""
         return {
             'parameters': asdict(self.params),
-            'neurons': {
-                'input': [n.to_dict() for n in self.input_neurons],
-                'hidden': [n.to_dict() for n in self.hidden_neurons],
-                'output': [n.to_dict() for n in self.output_neurons]
-            },
-            'synapses': [s.to_dict() for s in self.synapses],
-            'neuromodulators': self.neuromodulators,
+            'neurons': self.neurons.tolist(),
+            'synapses': self.synapses.tolist(),
+            'neuromodulators': self.neuromodulators.tolist(),
             'time': self.time,
             'step_count': self.step_count
         }
@@ -650,51 +361,110 @@ def load_network(filename: str) -> NeuraxonNetwork:
     # Create network
     network = NeuraxonNetwork(params)
 
-    # Restore neuron states
-    for neuron_data in data['neurons']['input']:
-        neuron = next((n for n in network.input_neurons if n.id == neuron_data['id']), None)
-        if neuron:
-            neuron.membrane_potential = neuron_data['membrane_potential']
-            neuron.trinary_state = neuron_data['trinary_state']
-            neuron.health = neuron_data['health']
-            neuron.is_active = neuron_data['is_active']
-
-    # Similar for hidden and output neurons
-    for neuron_data in data['neurons']['hidden']:
-        neuron = next((n for n in network.hidden_neurons if n.id == neuron_data['id']), None)
-        if neuron:
-            neuron.membrane_potential = neuron_data['membrane_potential']
-            neuron.trinary_state = neuron_data['trinary_state']
-            neuron.health = neuron_data['health']
-            neuron.is_active = neuron_data['is_active']
-
-    for neuron_data in data['neurons']['output']:
-        neuron = next((n for n in network.output_neurons if n.id == neuron_data['id']), None)
-        if neuron:
-            neuron.membrane_potential = neuron_data['membrane_potential']
-            neuron.trinary_state = neuron_data['trinary_state']
-            neuron.health = neuron_data['health']
-            neuron.is_active = neuron_data['is_active']
-
-    # Restore synapse states
-    network.synapses = []
-    for syn_data in data['synapses']:
-        synapse = Synapse(syn_data['pre_id'], syn_data['post_id'], params)
-        synapse.w_fast = syn_data['w_fast']
-        synapse.w_slow = syn_data['w_slow']
-        synapse.w_meta = syn_data['w_meta']
-        synapse.is_silent = syn_data['is_silent']
-        synapse.is_modulatory = syn_data['is_modulatory']
-        synapse.integrity = syn_data['integrity']
-        network.synapses.append(synapse)
-
-    # Restore neuromodulators
-    network.neuromodulators = data['neuromodulators']
+    # Restore network state
+    network.neurons = np.array(data['neurons'], dtype=np.float32)
+    synapses_data = data.get('synapses', [])
+    if not synapses_data:
+        network.synapses = np.empty((0, 10), dtype=np.float32)
+    else:
+        network.synapses = np.array(synapses_data, dtype=np.float32)
+    network.neuromodulators = np.array(data['neuromodulators'], dtype=np.float32)
     network.time = data['time']
     network.step_count = data['step_count']
 
     print(f"Network loaded from {filename}")
     return network
+
+
+# =============================================================================
+# LANGUAGE MODEL CLASS
+# =============================================================================
+
+class LanguageModel(NeuraxonNetwork):
+    """
+    A language model based on the Neuraxon network.
+    """
+    def __init__(self, tokenizer: Tokenizer, params: NetworkParameters = None):
+        """
+        Initializes the language model.
+
+        Args:
+            tokenizer: A tokenizer object.
+            params: Network parameters.
+        """
+        self.tokenizer = tokenizer
+
+        # Adjust network parameters for language modeling
+        if params is None:
+            params = NetworkParameters()
+
+        params.num_input_neurons = tokenizer.vocab_size
+        params.num_output_neurons = tokenizer.vocab_size
+
+        super().__init__(params)
+
+    @classmethod
+    def load(cls, filepath: str, tokenizer: Tokenizer):
+        """
+        Loads a language model from a file.
+
+        Args:
+            filepath: The path to the model file.
+            tokenizer: The tokenizer to use with the model.
+
+        Returns:
+            A LanguageModel instance.
+        """
+        network = load_network(filepath)
+        model = cls(tokenizer, network.params)
+        model.neurons = network.neurons
+        model.synapses = network.synapses
+        model.neuromodulators = network.neuromodulators
+        model.time = network.time
+        model.step_count = network.step_count
+
+        print(f"Language model loaded from {filepath}")
+        return model
+
+    def process_text(self, text: str, duration_per_char: int = 5):
+        """
+        Processes a string of text, feeding it into the network one character at a time
+        with continuous time processing.
+        """
+        encoded_text = self.tokenizer.encode(text)
+
+        for char_int in encoded_text:
+            # Convert the character to a trinary vector
+            input_vector = self.tokenizer.int_to_trinary_vector(char_int)
+
+            # Set the input neuron states
+            self.set_input_states(input_vector)
+
+            # Simulate for a duration to allow the network to process the character
+            for _ in range(duration_per_char):
+                self.simulate_step()
+
+    def predict_next_char(self, input_text: str) -> str:
+        """
+        Predicts the next character in a sequence.
+
+        Args:
+            input_text: The input text.
+
+        Returns:
+            The predicted next character.
+        """
+        # Process the input text to set the network's state
+        self.process_text(input_text)
+
+        # Get the output neuron states
+        output_states = self.get_output_states()
+
+        # Convert the output states to an integer
+        predicted_int = self.tokenizer.trinary_vector_to_int(output_states)
+
+        # Decode the integer to a character
+        return self.tokenizer.decode([predicted_int])
 
 
 
@@ -708,9 +478,9 @@ if __name__ == "__main__":
     params = NetworkParameters()
     network = NeuraxonNetwork(params)
 
-    print(f"   - Input neurons: {len(network.input_neurons)}")
-    print(f"   - Hidden neurons: {len(network.hidden_neurons)}")
-    print(f"   - Output neurons: {len(network.output_neurons)}")
+    print(f"   - Input neurons: {len(network.input_neuron_indices)}")
+    print(f"   - Hidden neurons: {len(network.hidden_neuron_indices)}")
+    print(f"   - Output neurons: {len(network.output_neuron_indices)}")
     print(f"   - Total synapses: {len(network.synapses)}")
 
     # Set input states

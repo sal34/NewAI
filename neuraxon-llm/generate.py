@@ -1,6 +1,5 @@
-from language_model import LanguageModel
+from neuraxon import LanguageModel, load_network
 from tokenizer import Tokenizer
-from neuraxon import load_network
 import argparse
 
 def generate_text(model: LanguageModel, tokenizer: Tokenizer, seed_text: str, length: int = 100) -> str:
